@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>입덕할 메뉴 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div data-site-header></div>
+
+    <main class="catalog">
+      <h1>입덕할 메뉴</h1>
+
+      <div class="catalog-tabs" role="group" aria-label="메뉴 카테고리">
+        <button type="button" data-category="new" aria-pressed="true"
+                aria-controls="catalog-items">신메뉴</button>
+        <button type="button" data-category="main" aria-pressed="false"
+                aria-controls="catalog-items">본품</button>
+        <button type="button" data-category="set" aria-pressed="false"
+                aria-controls="catalog-items">세트</button>
+        <button type="button" data-category="side" aria-pressed="false"
+                aria-controls="catalog-items">사이드</button>
+      </div>
+
+      <ul id="catalog-items" class="catalog-grid">
+        <li data-menu-group="main">
+          <a class="catalog-card" href="../detail/detail.html?menu=original"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/normal.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>첫입 오리지널 떡볶이</h2>
+            <p class="catalog-description">입덕볶이의 대표메뉴로 쫄깃한 밀떡에 매콤달콤한 소스를 듬뿍</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>15,000원</dd></div>
+              <div><dt>3-4인</dt><dd>25,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+
+        <li data-menu-group="main">
+          <a class="catalog-card" href="../detail/detail.html?menu=rose"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/rose.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>최애 로제 떡볶이</h2>
+            <p class="catalog-description">입덕볶이의 대표메뉴로 매콤한 떡볶이 소스에 크림을 더해 부드럽게</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>18,000원</dd></div>
+              <div><dt>3-4인</dt><dd>30,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+
+        <li data-menu-group="main">
+          <a class="catalog-card" href="../detail/detail.html?menu=spicy"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/spicy.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>불꽃 입덕 떡볶이</h2>
+            <p class="catalog-description">입덕볶이의 대표메뉴로 청양고추의 알싸한 매운맛이 끝까지 남는 떡볶이</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>17,000원</dd></div>
+              <div><dt>3-4인</dt><dd>28,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+
+        <li data-menu-group="main">
+          <a class="catalog-card" href="../detail/detail.html?menu=cheese"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/cheese.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>치즈 폭탄 떡볶이</h2>
+            <p class="catalog-description">입덕볶이의 대표메뉴로 매콤한 떡볶이 위에 쭉 늘어나는 모차렐라 듬뿍</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>18,000원</dd></div>
+              <div><dt>3-4인</dt><dd>30,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+
+        <li data-menu-group="set">
+          <a class="catalog-card" href="../detail/detail.html?menu=set-ipdeok"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/set_ipdeok.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>입덕 스타터 세트</h2>
+            <p class="catalog-description">오리지널 떡볶이, 모둠튀김(김말이 2개, 오징어 2개, 야채만두 1개), 미니 주먹밥</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>22,000원</dd></div>
+              <div><dt>3-4인</dt><dd>31,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+
+        <li data-menu-group="set">
+          <a class="catalog-card" href="../detail/detail.html?menu=set-rose"
+             aria-haspopup="dialog" aria-controls="catalog-detail">
+            <div class="catalog-visual">
+              <img class="catalog-food" src="../../img/menu/set_rose.png" alt=""
+                   width="1254" height="1254">
+            </div>
+            <div class="catalog-tags"><span>매콤</span><span>달달</span></div>
+            <h2>둘이서 최애 세트</h2>
+            <p class="catalog-description">로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개</p>
+            <dl class="catalog-prices">
+              <div><dt>1-2인</dt><dd>25,000원</dd></div>
+              <div><dt>3-4인</dt><dd>36,000원</dd></div>
+            </dl>
+          </a>
+        </li>
+      </ul>
+    </main>
+
+    <template id="catalog-side-card">
+      <li data-menu-group="side" hidden>
+        <div class="catalog-card catalog-card--side">
+          <div class="catalog-visual catalog-visual--side">
+            <img class="catalog-food" alt="" width="1254" height="1254" loading="lazy" hidden>
+            <div class="catalog-image-placeholder" aria-hidden="true"></div>
+          </div>
+          <h2 class="catalog-side-name"></h2>
+          <p class="catalog-description"></p>
+        </div>
+      </li>
+    </template>
+
+    <dialog id="catalog-detail" class="detail-sheet" aria-labelledby="detail-sheet-title">
+      <div class="detail-sheet__panel">
+        <div class="detail-sheet__header">
+          <h2 id="detail-sheet-title">메뉴 상세</h2>
+          <form method="dialog">
+            <button class="detail-sheet__close" type="submit" aria-label="상세 닫기" autofocus>
+              <span aria-hidden="true">×</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="detail-sheet__body" aria-busy="false">
+          <p class="detail-sheet__status" role="status"></p>
+          <iframe class="detail-sheet__frame" title="메뉴 상세와 주문 옵션" hidden></iframe>
+        </div>
+      </div>
+    </dialog>
+
+    <div data-site-footer></div>
+  </div>
+
+  <script>
+    const catalogItems = document.querySelector("#catalog-items");
+    const sideTemplate = document.querySelector("#catalog-side-card");
+
+    // 각 메뉴의 마지막 "#"에 실제 이미지 경로를 넣습니다.
+    const sideMenu = [
+      ["쫄깃 찰순대", "쫄깃한 당면순대. 떡볶이 소스에 콕 찍어 먹기 좋아요", "#"],
+      ["찍먹 모둠튀김", "김말이·오징어·야채만두를 한 접시에 담은 튀김 세트", "#"],
+      ["꼬소 김가루 주먹밥", "김가루와 참기름을 넣어 고소하게 뭉친 주먹밥", "#"],
+      ["빨간 입덕김밥", "매콤한 입덕 소스와 참치를 비빈 밥에 치즈를 넣어 완벽하게", "#"],
+      ["딸기잼 달걀 버터토스트", "식빵에 딸기잼을 바르고 달걀을 끼워 버터에 노릇하게 구웠어요", "#"],
+      ["한입 치즈볼", "바삭한 한입 속에 부드럽게 녹아드는 치즈", "#"],
+      ["최애 김말이", "당면을 김에 돌돌 말아 겉은 바삭, 속은 쫄깃하게", "#"]
+    ];
+
+    sideMenu.forEach(([name, description, imagePath]) => {
+      const item = sideTemplate.content.cloneNode(true);
+      item.querySelector(".catalog-side-name").textContent = name;
+      item.querySelector(".catalog-description").textContent = description;
+
+      if (imagePath !== "#") {
+        const image = item.querySelector(".catalog-food");
+        image.src = imagePath;
+        image.hidden = false;
+        item.querySelector(".catalog-image-placeholder").hidden = true;
+      }
+
+      catalogItems.append(item);
+    });
+
+    const categoryButtons = document.querySelectorAll(".catalog-tabs button");
+    const categoryItems = catalogItems.querySelectorAll("[data-menu-group]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let listAnimation;
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (button.getAttribute("aria-pressed") === "true") return;
+
+        categoryButtons.forEach((category) => {
+          category.setAttribute("aria-pressed", String(category === button));
+        });
+
+        const selectedCategory = button.dataset.category;
+
+        categoryItems.forEach((item) => {
+          const group = item.dataset.menuGroup;
+          item.hidden = selectedCategory === "new"
+            ? group === "side"
+            : group !== selectedCategory;
+        });
+
+        listAnimation?.cancel();
+
+        if (!reducedMotion.matches) {
+          listAnimation = catalogItems.animate(
+            [
+              { opacity: 0.45, transform: "translateY(8px)" },
+              { opacity: 1, transform: "translateY(0)" }
+            ],
+            { duration: 220, easing: "ease-out" }
+          );
+        }
+      });
+    });
+
+    const detailDialog = document.querySelector("#catalog-detail");
+    const detailTitle = document.querySelector("#detail-sheet-title");
+    const detailBody = document.querySelector(".detail-sheet__body");
+    const detailStatus = document.querySelector(".detail-sheet__status");
+    let detailFrame = document.querySelector(".detail-sheet__frame");
+    let activeCard;
+
+    function configureDetailFrame(frame, card, detailUrl) {
+      const detailDocument = frame.contentDocument;
+      const title = detailDocument?.querySelector("#detail-title");
+      const image = detailDocument?.querySelector("#detail-image");
+      const description = detailDocument?.querySelector("#detail-description");
+      const orderForm = detailDocument?.querySelector(".order-form");
+      const orderMenu = detailDocument?.querySelector("#order-menu");
+
+      if (!title || !image || !description || !orderForm || !orderMenu) {
+        return false;
+      }
+
+      const menuKey = detailUrl.searchParams.get("menu");
+      const menuName = card.querySelector("h2").textContent;
+      const flavorByMenu = {
+        "set-ipdeok": "original",
+        "set-rose": "rose"
+      };
+
+      detailDocument.title = `${menuName} | 입덕볶이`;
+      detailDocument.querySelector(".site-header")?.remove();
+      detailDocument.querySelector("#site-menu")?.remove();
+      detailDocument.querySelector(".detail-back")?.remove();
+
+      title.textContent = menuName;
+      image.src = card.querySelector(".catalog-food").src;
+      description.textContent = card.querySelector(".catalog-description").textContent;
+
+      const visual = detailDocument.querySelector(".detail-visual");
+
+      if (visual) {
+        visual.dataset.flavor = flavorByMenu[menuKey] ?? menuKey;
+      }
+
+      orderMenu.value = menuKey;
+      orderForm.target = "_top";
+
+      detailDocument.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") detailDialog.close();
+      });
+
+      return true;
+    }
+
+    catalogItems.addEventListener("click", (event) => {
+      const card = event.target.closest("a.catalog-card");
+
+      if (!card || event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      if (typeof detailDialog.showModal !== "function") return;
+
+      event.preventDefault();
+
+      const detailUrl = new URL(card.href);
+      const frame = document.createElement("iframe");
+      const menuName = card.querySelector("h2").textContent;
+
+      frame.className = "detail-sheet__frame";
+      frame.title = `${menuName} 상세와 주문 옵션`;
+      frame.hidden = true;
+
+      activeCard = card;
+      detailTitle.textContent = menuName;
+      detailStatus.textContent = "상세 메뉴를 불러오는 중이에요.";
+      detailBody.setAttribute("aria-busy", "true");
+
+      frame.addEventListener("load", () => {
+        if (!detailDialog.open || frame !== detailFrame) return;
+
+        detailBody.setAttribute("aria-busy", "false");
+
+        if (configureDetailFrame(frame, card, detailUrl)) {
+          detailStatus.textContent = "";
+          frame.hidden = false;
+        } else {
+          detailStatus.textContent = "상세 화면을 불러오지 못했어요. ";
+
+          const fallbackLink = document.createElement("a");
+          fallbackLink.href = card.href;
+          fallbackLink.textContent = "상세 페이지 열기";
+          detailStatus.append(fallbackLink);
+        }
+      }, { once: true });
+
+      frame.src = detailUrl.href;
+      detailFrame.replaceWith(frame);
+      detailFrame = frame;
+      detailDialog.showModal();
+    });
+
+    detailDialog.addEventListener("click", (event) => {
+      if (event.target === detailDialog) detailDialog.close();
+    });
+
+    detailDialog.addEventListener("close", () => {
+      detailFrame.hidden = true;
+      detailFrame.removeAttribute("src");
+      detailStatus.textContent = "";
+      detailBody.setAttribute("aria-busy", "false");
+      activeCard?.focus({ preventScroll: true });
+      activeCard = null;
+    });
+  </script>
+</body>
+</html>

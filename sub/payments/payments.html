@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>결제하기 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div data-site-header></div>
+
+    <main class="checkout-page">
+      <h1>결제하기</h1>
+
+      <form id="checkout">
+        <section class="order" aria-labelledby="order-title">
+          <h2 id="order-title">주문 메뉴</h2>
+
+          <a id="order-link" class="order-item" href="../detail/detail.html?menu=set-rose">
+            <img id="order-image" class="order-image" src="../../img/menu/set_rose.png"
+                 width="90" height="90" alt="">
+
+            <span class="order-copy">
+              <span class="tags"><span>매콤</span> <span>달달</span></span>
+              <strong id="order-name">둘이서 최애 세트 (3–4인)</strong>
+              <small id="order-description">로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개</small>
+            </span>
+          </a>
+
+          <ul id="order-extras" class="order-extras" aria-label="추가 메뉴" hidden></ul>
+          <div class="row order-price">
+            <span>주문 금액</span>
+            <strong id="order-price">36,000원</strong>
+          </div>
+        </section>
+
+        <section class="coupons" aria-labelledby="coupon-title">
+          <h2 id="coupon-title">쿠폰 적용</h2>
+          <p>할인쿠폰 <small id="coupon-count">보유 2장 / 적용 1장</small></p>
+
+          <details id="coupon-picker">
+            <summary>
+              <span id="coupon-label">−1,800원 (신규 가입 5% 할인 쿠폰)</span>
+              <span class="change">변경</span>
+              <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </summary>
+
+            <div class="coupon-options">
+              <label>
+                <input type="radio" name="coupon" value="welcome-percent" checked>
+                <span>신규 가입 5% 할인 쿠폰 <small>(중복 사용 불가)</small></span>
+              </label>
+              <label>
+                <input type="radio" name="coupon" value="welcome-fixed">
+                <span>입덕 환영 1,000원 할인 쿠폰</span>
+              </label>
+              <label>
+                <input type="radio" name="coupon" value="none">
+                <span>쿠폰 사용 안 함</span>
+              </label>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <fieldset>
+            <legend>결제수단</legend>
+            <p class="payment-type"><span aria-hidden="true"></span>일반 결제</p>
+
+            <div class="methods">
+              <label><input type="radio" name="method" value="card"><span>신용카드</span></label>
+              <label><input type="radio" name="method" value="naver" checked><span>네이버페이</span></label>
+              <label><input type="radio" name="method" value="kakao"><span>카카오페이</span></label>
+              <label><input type="radio" name="method" value="payco"><span>페이코</span></label>
+              <label><input type="radio" name="method" value="smile"><span>스마일페이</span></label>
+              <label><input type="radio" name="method" value="mobile"><span>휴대폰결제</span></label>
+              <label><input type="radio" name="method" value="apple"><span>애플페이</span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="separated">
+          <details open>
+            <summary class="heading">
+              결제정보 <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </summary>
+
+            <dl>
+              <div class="row">
+                <dt>주문 금액</dt>
+                <dd id="payment-subtotal">36,000원</dd>
+              </div>
+              <div class="row coupon-detail">
+                <dt id="discount-name">신규 가입 5% 할인 쿠폰</dt>
+                <dd id="discount">−1,800원</dd>
+              </div>
+              <div class="row total">
+                <dt>총 결제금액</dt>
+                <dd id="total" aria-live="polite">34,200원</dd>
+              </div>
+            </dl>
+          </details>
+        </section>
+
+        <section class="separated">
+          <details>
+            <summary class="heading">
+              유의사항 및 이용조건 <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </summary>
+            <p class="notice">결제 전에 선택한 메뉴와 쿠폰 적용 금액을 확인해 주세요.</p>
+          </details>
+
+          <label class="consent">
+            <input id="agree" type="checkbox" required>
+            <span>위 주문내용을 확인하였으며, <u>개인정보 제3자 제공 내역</u> 및 결제에 동의합니다.</span>
+          </label>
+        </section>
+
+        <div class="pay-area separated">
+          <button id="pay" type="submit" disabled>결제하기</button>
+        </div>
+      </form>
+    </main>
+
+    <div data-site-footer></div>
+  </div>
+
+  <script>
+    const menuItems = {
+      original: {
+        name: "첫입 오리지널 떡볶이",
+        image: "normal.png",
+        description: "쫄깃한 밀떡에 매콤달콤한 소스를 듬뿍",
+        prices: { small: 15000, large: 25000 }
+      },
+      rose: {
+        name: "최애 로제 떡볶이",
+        image: "rose.png",
+        description: "매콤한 떡볶이 소스에 크림을 더해 부드럽게",
+        prices: { small: 18000, large: 30000 }
+      },
+      spicy: {
+        name: "불꽃 입덕 떡볶이",
+        image: "spicy.png",
+        description: "청양고추의 알싸한 매운맛이 끝까지 남는 떡볶이",
+        prices: { small: 17000, large: 28000 }
+      },
+      cheese: {
+        name: "치즈 폭탄 떡볶이",
+        image: "cheese.png",
+        description: "매콤한 떡볶이 위에 쭉 늘어나는 모차렐라 듬뿍",
+        prices: { small: 18000, large: 30000 }
+      },
+      "set-ipdeok": {
+        name: "입덕 스타터 세트",
+        image: "set_ipdeok.png",
+        description: "오리지널 떡볶이, 모둠튀김, 미니 주먹밥",
+        prices: { small: 22000, large: 31000 }
+      },
+      "set-rose": {
+        name: "둘이서 최애 세트",
+        image: "set_rose.png",
+        description: "로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개",
+        prices: { small: 25000, large: 36000 }
+      }
+    };
+
+    const extraItems = [
+      ["topping", "boiled-egg", "삶은 달걀 1개", 1000],
+      ["topping", "wheat-rice-cakes", "밀떡 추가", 1500],
+      ["topping", "fish-cake", "어묵 추가", 1500],
+      ["topping", "glass-noodles", "중국당면 추가", 2000],
+      ["topping", "bunmoja", "분모자 추가", 2000],
+      ["topping", "mozzarella", "모차렐라 치즈 추가", 3000],
+      ["radish", "yes", "단무지 추가 1팩", 500],
+      ["drink", "cola", "콜라 355ml", 2000],
+      ["drink", "zero-cola", "제로콜라 355ml", 2000],
+      ["drink", "cider", "사이다 355ml", 2000],
+      ["drink", "coolpis-peach", "쿨피스 복숭아 450ml", 2000],
+      ["drink", "water", "생수 500ml", 1000],
+      ["side", "sundae", "쫄깃 찰순대", 4500],
+      ["side", "assorted-fritters", "찍먹 모둠튀김", 5500],
+      ["side", "rice-ball", "꼬소 김가루 주먹밥", 3000],
+      ["side", "spicy-gimbap", "빨간 입덕김밥", 6000],
+      ["side", "butter-toast", "딸기잼 달걀 버터토스트", 4500],
+      ["side", "cheese-ball", "한입 치즈볼", 4000],
+      ["side", "seaweed-roll", "최애 김말이", 2500]
+    ];
+
+    const coupons = {
+      "welcome-percent": {
+        name: "신규 가입 5% 할인 쿠폰",
+        discount: (amount) => Math.round(amount * 0.05)
+      },
+      "welcome-fixed": {
+        name: "입덕 환영 1,000원 할인 쿠폰",
+        discount: () => 1000
+      },
+      none: {
+        name: "쿠폰 사용 안 함",
+        discount: () => 0
+      }
+    };
+
+    const checkout = document.querySelector("#checkout");
+    const picker = document.querySelector("#coupon-picker");
+    const agree = document.querySelector("#agree");
+    const pay = document.querySelector("#pay");
+    const params = new URLSearchParams(window.location.search);
+    const priceFormat = new Intl.NumberFormat("ko-KR");
+
+    function won(amount) {
+      return `${priceFormat.format(amount)}원`;
+    }
+
+    function getQuantity(key) {
+      const quantity = Number(params.get(key));
+      const maxSafeQuantity = Math.floor(Number.MAX_SAFE_INTEGER / 1000000);
+
+      return Number.isSafeInteger(quantity) && quantity >= 1 && quantity <= maxSafeQuantity
+        ? quantity
+        : 1;
+    }
+
+    const requestedMenu = params.get("menu");
+    const hasMenu = Object.hasOwn(menuItems, requestedMenu);
+    const menuKey = hasMenu ? requestedMenu : "set-rose";
+    const menu = menuItems[menuKey];
+    const serving = hasMenu && params.get("serving") !== "large" ? "small" : "large";
+    const servingLabel = serving === "small" ? "1–2인" : "3–4인";
+    const menuQuantity = hasMenu ? getQuantity("quantity") : 1;
+    const extrasList = document.querySelector("#order-extras");
+    let orderPrice = menu.prices[serving] * menuQuantity;
+
+    document.querySelector("#order-link").href =
+      `../detail/detail.html?menu=${encodeURIComponent(menuKey)}`;
+    document.querySelector("#order-image").src = `../../img/menu/${menu.image}`;
+    document.querySelector("#order-name").textContent =
+      `${menu.name} (${servingLabel}) × ${menuQuantity}`;
+    document.querySelector("#order-description").textContent = menu.description;
+
+    if (hasMenu) {
+      extraItems.forEach(([group, key, name, unitPrice]) => {
+        if (!params.getAll(group).includes(key)) return;
+
+        const quantity = getQuantity(`qty-${group}-${key}`);
+        const amount = unitPrice * quantity;
+        const row = document.createElement("li");
+        const label = document.createElement("span");
+        const price = document.createElement("span");
+
+        row.className = "row";
+        label.textContent = `${name} × ${quantity}`;
+        price.textContent = won(amount);
+        row.append(label, price);
+        extrasList.append(row);
+        orderPrice += amount;
+      });
+    }
+
+    extrasList.hidden = extrasList.children.length === 0;
+    document.querySelector("#order-price").textContent = won(orderPrice);
+    document.querySelector("#payment-subtotal").textContent = won(orderPrice);
+
+    function updateCoupon() {
+      const selected = checkout.querySelector('input[name="coupon"]:checked');
+      const coupon = coupons[selected.value];
+      const discount = Math.min(orderPrice, coupon.discount(orderPrice));
+      const amount = discount ? `−${won(discount)}` : won(0);
+
+      document.querySelector("#coupon-label").textContent =
+        discount ? `${amount} (${coupon.name})` : coupon.name;
+      document.querySelector("#coupon-count").textContent =
+        `보유 2장 / 적용 ${discount ? "1장" : "0장"}`;
+      document.querySelector("#discount-name").textContent = coupon.name;
+      document.querySelector("#discount").textContent = amount;
+      document.querySelector("#total").textContent = won(orderPrice - discount);
+    }
+
+    function updatePayButton() {
+      pay.disabled = !agree.checked;
+    }
+
+    picker.addEventListener("change", () => {
+      updateCoupon();
+      picker.open = false;
+      picker.querySelector("summary").focus();
+    });
+
+    agree.addEventListener("change", updatePayButton);
+
+    checkout.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (agree.checked) {
+        window.location.assign("../payments_fin/payment_fin.html");
+      }
+    });
+
+    function refreshCheckout() {
+      updateCoupon();
+      updatePayButton();
+    }
+
+    window.addEventListener("pageshow", refreshCheckout);
+    refreshCheckout();
+  </script>
+</body>
+</html>

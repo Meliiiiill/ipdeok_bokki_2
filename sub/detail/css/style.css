@@ -1,0 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap");
+
+:root {
+  --page-max-width: 500px;
+  --page-gutter: 20px;
+  --brand: #d64920;
+  --brand-ink: #a93617;
+  --text: #222;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  color: var(--text);
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-ink);
+  outline-offset: 3px;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  min-height: 100vh;
+  padding-bottom: calc(var(--detail-summary-height, 120px) + 20px);
+  margin-inline: auto;
+  background: #fff;
+}
+
+/* 메뉴 사진과 설명 */
+.menu-detail {
+  padding: 12px var(--page-gutter) 0;
+}
+
+.detail-visual {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  border-radius: 20px;
+  background: #fcfce4;
+}
+
+.detail-visual[data-flavor="rose"] {
+  background: #fbe9ee;
+}
+
+.detail-visual[data-flavor="cheese"] {
+  background: #fff1d5;
+}
+
+.detail-visual[data-flavor="spicy"] {
+  background: #f9e4e5;
+}
+
+.detail-visual img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: min(80%, 220px);
+  height: 90%;
+  margin: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 8px rgb(69 37 26 / 16%));
+}
+
+.detail-body {
+  padding-top: 18px;
+}
+
+.detail-body h1 {
+  margin: 0;
+  font-size: clamp(23px, 6vw, 30px);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+#detail-description {
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+/* 주문 옵션 */
+.order-form {
+  display: grid;
+  gap: 24px;
+  margin-top: 26px;
+}
+
+.order-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.order-form legend {
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.option-grid,
+.side-list {
+  display: grid;
+  gap: 8px;
+}
+
+.option-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.option-grid:has(.quantity-option) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.order-option,
+.side-card {
+  min-height: 50px;
+  padding: 10px 12px;
+  border: 1px solid #e9e1dc;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.order-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-option > span {
+  min-width: 0;
+  word-break: keep-all;
+}
+
+.side-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-option:has(input:checked),
+.side-card:has(input:checked),
+.quantity-option:has(input:checked) {
+  border-color: var(--brand);
+  background: #fff3eb;
+}
+
+.order-form input:is([type="checkbox"], [type="radio"]) {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin: 0;
+  accent-color: var(--brand-ink);
+}
+
+.order-option small,
+.side-card small {
+  color: var(--brand-ink);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-option small {
+  display: block;
+  margin-top: 3px;
+}
+
+.order-option .radish-note {
+  color: #666;
+  white-space: normal;
+}
+
+/* 수량 조절 */
+.main-quantity,
+.quantity-option {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #e9e1dc;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.main-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.quantity-option {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.quantity-option:has(input:focus-visible) {
+  outline: 2px solid var(--brand-ink);
+  outline-offset: 3px;
+}
+
+.quantity-option > .order-option,
+.quantity-option > .side-card {
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.quantity-option > label > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.quantity-option > .quantity-control {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.quantity-control {
+  display: inline-grid;
+  grid-template-columns: 36px minmax(24px, auto) 36px;
+  min-height: 40px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #e9e1dc;
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+}
+
+.quantity-option:has(input:checked) .quantity-control {
+  border-color: var(--brand);
+}
+
+.quantity-control button {
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: #fff3eb;
+  color: var(--brand-ink);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.quantity-control button:first-child {
+  border-inline-end: 1px solid #e9e1dc;
+}
+
+.quantity-control button:last-child {
+  border-inline-start: 1px solid #e9e1dc;
+}
+
+.quantity-control button:focus-visible {
+  outline-offset: -3px;
+}
+
+.quantity-control button:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+.quantity-count {
+  padding-inline: 3px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 사이드 카드 */
+.quantity-option:has(.side-card) > .side-card {
+  grid-column: 1 / -1;
+  grid-row: 1 / 3;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(40px, auto);
+  gap: 6px;
+}
+
+.quantity-option:has(.side-card) > .quantity-control {
+  position: relative;
+  z-index: 1;
+  grid-row: 2;
+}
+
+.side-info {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.side-info strong,
+.side-info .side-description {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.side-info strong {
+  font-weight: 800;
+}
+
+.side-info .side-description {
+  max-width: 55%;
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: right;
+}
+
+/* 고정 총액과 하단 버튼 */
+.detail-summary {
+  position: fixed;
+  z-index: 2;
+  inset-inline: 0;
+  bottom: 0;
+  display: grid;
+  width: min(100%, var(--page-max-width));
+  gap: 10px;
+  margin-inline: auto;
+  padding: 12px var(--page-gutter)
+    calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid #e9e1dc;
+  background: #fff;
+  box-shadow: 0 -4px 14px rgb(0 0 0 / 8%);
+}
+
+.detail-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+#detail-total-price {
+  color: var(--brand-ink);
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.detail-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.detail-cart,
+.detail-pay {
+  display: grid;
+  min-height: 52px;
+  place-items: center;
+  padding: 8px;
+  border: 1px solid var(--brand-ink);
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  word-break: keep-all;
+  cursor: pointer;
+}
+
+.detail-cart {
+  background: #fff;
+  color: var(--brand-ink);
+}
+
+.detail-pay {
+  background: var(--brand-ink);
+  color: #fff;
+}

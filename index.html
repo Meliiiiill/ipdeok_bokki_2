@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입덕볶이</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+
+<script defer src="https://unpkg.com/lucide@latest"></script>
+<script defer src="js/layout.js"></script>
+<script defer src="js/main.js"></script></head>
+<body>
+<div class="page">
+    <div class="hero-shell">
+        <div data-site-header="overlay"></div>
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title" class="visually-hidden">입덕볶이</h1>
+
+            <div class="hero-track">
+                <div class="hero-slide">
+                    <img src="img/hero_1.jpg" alt="" fetchpriority="high">
+                </div>
+                <div class="hero-slide">
+                    <img src="img/hero_2.png" alt="">
+                </div>
+            </div>
+
+            <button class="hero-arrow hero-arrow--prev" type="button" aria-label="이전 사진">
+                <i data-lucide="chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="hero-arrow hero-arrow--next" type="button" aria-label="다음 사진">
+                <i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+
+            <div class="hero-bottom">
+                <div class="hero-timeline" aria-hidden="true">
+                    <span class="hero-timeline__fill"></span>
+                </div>
+                <a class="hero-scroll" href="#order-actions">
+                    <span>Scroll down</span>
+                    <i data-lucide="chevron-down" aria-hidden="true"></i>
+                </a>
+                <button class="hero-pause" type="button" aria-label="슬라이드 일시정지"
+                        data-paused="false">
+                    <i class="hero-pause__pause" data-lucide="pause" aria-hidden="true"></i>
+                    <i class="hero-pause__play" data-lucide="play" aria-hidden="true"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <main>
+        <div id="order-actions" class="order-actions">
+            <a class="order-button order-button--primary" href="sub/lists/lists.html">
+                <img src="img/character/ipdeok_normal.png" alt="">
+                <span>배달 주문하기</span>
+            </a>
+
+            <button id="phone-order-button" class="order-button" type="button"
+                    aria-haspopup="dialog" aria-controls="phone-order-dialog">
+                <img src="img/character/ipdeok_normal.png" alt="">
+                <span>전화 주문하기</span>
+            </button>
+
+            <a class="order-button" href="sub/lists/lists.html">
+                <img src="img/character/ipdeok_normal.png" alt="">
+                <span>쿠폰 사용</span>
+            </a>
+        </div>
+        <dialog id="phone-order-dialog" class="phone-dialog" aria-labelledby="phone-order-number">
+            <p id="phone-order-number" class="phone-dialog__number">
+                <i data-lucide="phone" aria-hidden="true"></i>
+                <span>010-1234-5678</span>
+            </p>
+            <form class="phone-dialog__actions" method="dialog">
+                <button type="submit" autofocus>취소</button>
+                <a href="tel:01012345678">전화하기</a>
+            </form>
+        </dialog>
+
+        <section class="featured" aria-labelledby="featured-title">
+            <h2 id="featured-title">입덕 추천 메뉴</h2>
+
+            <div class="section-labels" role="group" aria-label="추천 메뉴 선택">
+                <button class="pill is-current" data-flavor="original" type="button"
+                        aria-pressed="true" aria-controls="featured-original">#입덕볶이</button>
+                <button class="pill" data-flavor="rose" type="button"
+                        aria-pressed="false" aria-controls="featured-rose">#이맛이로제</button>
+                <button class="pill" data-flavor="spicy" type="button"
+                        aria-pressed="false" aria-controls="featured-spicy">#불꽃입덕</button>
+            </div>
+
+            <div class="featured-track">
+                <article id="featured-original" class="featured-card is-current" data-flavor="original"
+                         style="--card-offset: 0">
+                    <p class="featured-rank">BEST 1</p>
+                    <h3>첫입 오리지널 떡볶이</h3>
+                    <p class="featured-description">입덕볶이의 대표메뉴로 쫄깃한 밀떡에 매콤달콤한 소스를 듬뿍</p>
+                    <a class="featured-order" href="sub/detail/detail.html?menu=original">주문하기</a>
+                    <div class="featured-visual">
+                        <img class="featured-food" src="img/menu/normal.png" alt="">
+                        <div class="featured-mascot" aria-hidden="true">
+                            <img src="img/character/ipdeok_normal.png" alt="">
+                            <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="featured-rose" class="featured-card" data-flavor="rose"
+                         style="--card-offset: 1" inert>
+                    <p class="featured-rank">BEST 2</p>
+                    <h3>최애 로제 떡볶이</h3>
+                    <p class="featured-description">입덕볶이의 대표메뉴로 매콤한 떡볶이 소스에 크림을 더해 부드럽게</p>
+                    <a class="featured-order" href="sub/detail/detail.html?menu=rose">주문하기</a>
+                    <div class="featured-visual">
+                        <img class="featured-food" src="img/menu/rose.png" alt="">
+                        <div class="featured-mascot" aria-hidden="true">
+                            <img src="img/character/ipdeok_normal.png" alt="">
+                            <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="featured-spicy" class="featured-card" data-flavor="spicy"
+                         style="--card-offset: -1" inert>
+                    <p class="featured-rank">BEST 3</p>
+                    <h3>불꽃 입덕 떡볶이</h3>
+                    <p class="featured-description">입덕볶이의 대표메뉴로 청양고추의 알싸한 매운맛이 끝까지 남는 떡볶이</p>
+                    <a class="featured-order" href="sub/detail/detail.html?menu=spicy">주문하기</a>
+                    <div class="featured-visual">
+                        <img class="featured-food" src="img/menu/spicy.png" alt="">
+                        <div class="featured-mascot" aria-hidden="true">
+                            <img src="img/character/ipdeok_normal.png" alt="">
+                            <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+                        </div>
+                    </div>
+                </article>
+
+                <button class="featured-arrow featured-arrow--prev" type="button" aria-label="이전 추천 메뉴">
+                    <i data-lucide="chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="featured-arrow featured-arrow--next" type="button" aria-label="다음 추천 메뉴">
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="menu-section" aria-labelledby="menu-title">
+            <h2 id="menu-title">입덕 메뉴</h2>
+
+            <div class="section-labels menu-categories" role="group" aria-label="메뉴 종류">
+                <button class="pill is-current" type="button" aria-pressed="true"
+                        aria-controls="menu-items">단품 메뉴</button>
+                <button class="pill" type="button" aria-pressed="false"
+                        aria-controls="menu-items">세트 메뉴</button>
+                <button class="pill" type="button" aria-pressed="false"
+                        aria-controls="menu-items">사이드 메뉴</button>
+            </div>
+
+            <div class="menu-browse">
+                <a class="menu-browse-link" href="sub/lists/lists.html" aria-label="떡볶이 메뉴 더 보러가기">
+                    <span class="menu-browse-link__text">더 보러가기</span>
+                    <svg viewBox="0 0 180 22" preserveAspectRatio="none" aria-hidden="true">
+                        <path class="menu-browse-link__line" d="M2 20H176L157 3"></path>
+                        <path class="menu-browse-link__line menu-browse-link__line--red"
+                              d="M2 20H176L157 3"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <ul id="menu-items" class="menu-grid">
+                <li class="menu-card">
+                    <div class="menu-card__visual">
+                        <img class="menu-card__food" src="img/menu/normal.png" alt="" loading="lazy">
+                        <img class="menu-card__mascot" src="img/character/ipdeok_normal.png" alt="" loading="lazy">
+                        <a class="menu-detail-link" href="sub/detail/detail.html?menu=original"
+                           aria-label="첫입 오리지널 떡볶이 상세 페이지로 이동">상세 페이지로 이동</a>
+                    </div>
+                    <h3>첫입 오리지널 떡볶이</h3>
+                </li>
+                <li class="menu-card">
+                    <div class="menu-card__visual">
+                        <img class="menu-card__food" src="img/menu/rose.png" alt="" loading="lazy">
+                        <img class="menu-card__mascot" src="img/character/ipdeok_normal.png" alt="" loading="lazy">
+                        <a class="menu-detail-link" href="sub/detail/detail.html?menu=rose"
+                           aria-label="최애 로제 떡볶이 상세 페이지로 이동">상세 페이지로 이동</a>
+                    </div>
+                    <h3>최애 로제 떡볶이</h3>
+                </li>
+                <li class="menu-card">
+                    <div class="menu-card__visual">
+                        <img class="menu-card__food" src="img/menu/cheese.png" alt="" loading="lazy">
+                        <img class="menu-card__mascot" src="img/character/ipdeok_normal.png" alt="" loading="lazy">
+                        <a class="menu-detail-link" href="sub/detail/detail.html?menu=cheese"
+                           aria-label="치즈 폭탄 떡볶이 상세 페이지로 이동">상세 페이지로 이동</a>
+                    </div>
+                    <h3>치즈 폭탄 떡볶이</h3>
+                </li>
+                <li class="menu-card">
+                    <div class="menu-card__visual">
+                        <img class="menu-card__food" src="img/menu/spicy.png" alt="" loading="lazy">
+                        <img class="menu-card__mascot" src="img/character/ipdeok_normal.png" alt="" loading="lazy">
+                        <a class="menu-detail-link" href="sub/detail/detail.html?menu=spicy"
+                           aria-label="불꽃 입덕 떡볶이 상세 페이지로 이동">상세 페이지로 이동</a>
+                    </div>
+                    <h3>불꽃 입덕 떡볶이</h3>
+                </li>
+            </ul>
+        </section>
+
+        <section class="event-section" aria-labelledby="event-title">
+            <div class="event-heading">
+                <h2 id="event-title">입덕 이벤트</h2>
+                <div class="event-filters" role="group" aria-label="이벤트 구분">
+                    <button type="button" aria-pressed="true" aria-controls="event-active">진행중</button>
+                    <button type="button" aria-pressed="false" aria-controls="event-ended">종료</button>
+                    <button type="button" aria-pressed="false" aria-controls="event-winners">당첨자</button>
+                </div>
+            </div>
+
+            <div id="event-active" class="event-panel">
+                <div id="event-track" class="event-track" tabindex="0" role="region"
+                     aria-label="진행중 이벤트 카드">
+                    <a class="story-card" href="sub/community/community.html#events">
+                        <img class="story-image" src="img/character/ipdeok_event.jpg" alt="" loading="lazy">
+                        <div class="story-copy">
+                            <p class="story-category">수험생 할인</p>
+                            <h3>수능 끝, 입덕하자! 수험생에게 통 크게 할인!</h3>
+                            <p class="story-date">
+                                <time datetime="2026-11-23">2026.11.23</time> –
+                                <time datetime="2026-12-31">2026.12.31</time>
+                            </p>
+                        </div>
+                    </a>
+
+                    <a class="story-card" href="sub/community/community.html#events">
+                        <img class="story-image" src="img/character/ipdeok_event.jpg" alt="" loading="lazy">
+                        <div class="story-copy">
+                            <p class="story-category">예시 이벤트</p>
+                            <h3>나의 최애 떡볶이</h3>
+                        </div>
+                    </a>
+
+                    <a class="story-card" href="sub/community/community.html#events">
+                        <img class="story-image" src="img/character/ipdeok_event.jpg" alt="" loading="lazy">
+                        <div class="story-copy">
+                            <p class="story-category">준비 중</p>
+                            <h3>다음 입덕 이벤트를 준비하고 있어요</h3>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="event-arrows" role="group" aria-label="이벤트 카드 이동">
+                    <button class="event-arrow event-arrow--prev" type="button"
+                            aria-label="이전 이벤트 카드" aria-controls="event-track" disabled>
+                        <i data-lucide="chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="event-arrow event-arrow--next" type="button"
+                            aria-label="다음 이벤트 카드" aria-controls="event-track">
+                        <i data-lucide="chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="event-ended" class="event-panel" hidden>
+                <p class="event-empty">아직 종료된 이벤트가 없어요.</p>
+            </div>
+
+            <div id="event-winners" class="event-panel" hidden>
+                <p class="event-empty">아직 발표된 당첨자가 없어요.</p>
+            </div>
+
+            <div class="section-more">
+                <a class="more-link" href="sub/community/community.html#events">
+                    이벤트 더 보러가기
+                    <i data-lucide="arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="news-section" aria-labelledby="news-title">
+            <h2 id="news-title">입덕 뉴스</h2>
+
+            <a class="story-card" href="sub/community/community.html">
+                <img class="story-image" src="img/character/ipdeok_news.jpg" alt="" loading="lazy">
+                <div class="story-copy">
+                    <p class="story-category">예시 뉴스</p>
+                    <h3>입덕볶이 대표, 지역 아동복지센터에 기부금 전달</h3>
+                    <p class="story-description">아이들의 돌봄과 방과 후 활동을 돕기 위해 기부금을 전했어요.</p>
+                </div>
+            </a>
+
+            <div class="section-more">
+                <a class="more-link" href="sub/community/community.html">
+                    뉴스 더 보러가기
+                    <i data-lucide="arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+<div class="footer-mascot" aria-hidden="true">
+    <img src="img/character/ipdeok_normal.png" alt=""
+         width="104" height="104" loading="lazy">
+</div>
+    <footer class="site-footer">
+        <div class="site-footer__content">
+            <nav class="footer-social" aria-label="입덕볶이 SNS">
+                <a href="#" aria-label="Facebook">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/icons/facebook.svg"
+                        width="20" height="20" alt="" loading="lazy">
+                </a>
+                <a href="#" aria-label="X">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/icons/twitter-x.svg"
+                        width="20" height="20" alt="" loading="lazy">
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/icons/instagram.svg"
+                        width="20" height="20" alt="" loading="lazy">
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/icons/youtube.svg"
+                        width="20" height="20" alt="" loading="lazy">
+                </a>
+            </nav>
+
+            <address class="footer-address">서울특별시 강남구 입덕로 3456</address>
+            <p class="footer-copyright">&copy; 2026 입덕볶이. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <dialog id="site-menu" class="menu-drawer" aria-label="사이트 메뉴">
+        <div class="menu-drawer__panel">
+            <form method="dialog" class="menu-drawer__controls">
+                <button class="menu-close" type="submit" aria-label="메뉴 닫기" autofocus>
+                    <i data-lucide="x" aria-hidden="true"></i>
+                </button>
+            </form>
+            <nav aria-label="페이지 이동">
+                <ul class="menu-links">
+                    <li><a href="sub/about/about.html">소개</a></li>
+                    <li><a href="sub/lists/lists.html">떡볶이 메뉴</a></li>
+                    <li><a href="sub/community/community.html">커뮤니티</a></li>
+                    <li><a href="sub/login/login.html">로그인/회원가입</a></li>
+                </ul>
+            </nav>
+        </div>
+    </dialog>
+</div>
+</body>
+</html>

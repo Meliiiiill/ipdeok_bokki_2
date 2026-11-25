@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>커뮤니티 | 입덕볶이</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="../../js/layout.js"></script></head>
+<body>
+    <div class="page">
+<div data-site-header></div>
+        <main>
+            <section class="community-hero" aria-labelledby="community-title">
+                <div class="community-hero__copy">
+                    <h1 id="community-title">입덕 커뮤니티</h1>
+                    <p>오늘의 떡볶이 후기를 남기고<br>입덕볶이 이벤트와 뉴스도 만나보세요.</p>
+                </div>
+                <img class="community-hero__mascot"
+                     src="../../img/character/ipdeok_normal.png" alt="">
+            </section>
+
+            <nav class="community-nav" aria-label="커뮤니티 바로가기">
+                <a class="pill-link" href="#reviews">후기</a>
+                <a class="pill-link" href="#events">이벤트</a>
+                <a class="pill-link" href="#news">뉴스</a>
+            </nav>
+
+            <section id="reviews" class="community-section" aria-labelledby="review-title">
+                <h2 id="review-title">입덕 후기</h2>
+
+                <details class="review-editor">
+                    <summary class="pill-link">후기 쓰기</summary>
+
+                    <form id="review-form" class="review-form">
+                        <label for="review-menu">먹어본 메뉴</label>
+                        <select id="review-menu" name="menu" required>
+                            <option value="">메뉴를 골라주세요</option>
+                            <option>첫입 오리지널 떡볶이</option>
+                            <option>최애 로제 떡볶이</option>
+                            <option>치즈 폭탄 떡볶이</option>
+                            <option>불꽃 입덕 떡볶이</option>
+                        </select>
+
+                        <label for="review-rating">별점</label>
+                        <select id="review-rating" name="rating" required>
+                            <option value="">별점을 골라주세요</option>
+                            <option value="5">5점</option>
+                            <option value="4">4점</option>
+                            <option value="3">3점</option>
+                            <option value="2">2점</option>
+                            <option value="1">1점</option>
+                        </select>
+
+                        <label for="review-content">후기 내용</label>
+                        <textarea id="review-content" name="content" rows="4"
+                                  maxlength="300" required
+                                  placeholder="어떤 맛이었는지 들려주세요."></textarea>
+
+                        <button class="primary-button" type="submit">후기 등록</button>
+                    </form>
+                </details>
+
+                <p id="review-status" class="status-message" role="status"></p>
+                <p id="review-empty" class="empty-message">아직 등록된 후기가 없어요.</p>
+                <ul id="review-list" class="review-list" aria-label="등록된 후기"></ul>
+
+                <template id="review-template">
+                    <li>
+                        <article class="review-card">
+                            <div class="review-card__header">
+                                <h3 class="review-card__menu"></h3>
+                                <time class="review-card__date"></time>
+                            </div>
+                            <p class="review-card__rating"></p>
+                            <p class="review-card__content"></p>
+                        </article>
+                    </li>
+                </template>
+            </section>
+
+            <section id="events" class="community-section event-section" aria-labelledby="event-title">
+                <h2 id="event-title">입덕 이벤트</h2>
+
+                <article class="community-card">
+                    <img class="community-card__image"
+                         src="../../img/character/ipdeok_event.jpg"
+                         width="80" height="80" alt="" loading="lazy">
+
+                    <div class="community-card__copy">
+                        <p class="community-card__label">예시 이벤트</p>
+                        <h3>나의 최애 떡볶이</h3>
+                        <p class="community-card__description">
+                            후기를 남기고 아래 버튼을 눌러 참여해 보세요.
+                        </p>
+                        <button id="event-join" class="pill-link" type="button">
+                            이벤트 참여하기
+                        </button>
+                        <p id="event-status" class="status-message" role="status"></p>
+                    </div>
+                </article>
+            </section>
+
+            <section id="news" class="community-section" aria-labelledby="news-title">
+                <h2 id="news-title">입덕 뉴스</h2>
+
+                <article class="community-card">
+                    <img class="community-card__image"
+                         src="../../img/character/ipdeok_news.jpg"
+                         width="80" height="80" alt="" loading="lazy">
+
+                    <div class="community-card__copy">
+                        <p class="community-card__label">예시 뉴스</p>
+                        <h3>입덕볶이 대표, 지역 아동복지센터에 기부금 전달</h3>
+                        <p class="community-card__description">
+                            아이들의 돌봄과 방과 후 활동을 돕기 위해 기부금을 전했어요.
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <dialog id="site-menu" class="menu-drawer" aria-label="사이트 메뉴">
+            <div class="menu-drawer__panel">
+                <form method="dialog" class="menu-drawer__controls">
+                    <button class="menu-close" type="submit" aria-label="메뉴 닫기" autofocus>
+                        <i data-lucide="x" aria-hidden="true"></i>
+                    </button>
+                </form>
+
+                <nav aria-label="페이지 이동">
+                    <ul class="menu-links">
+                        <li><a href="../about/about.html">소개</a></li>
+                        <li><a href="../lists/lists.html">떡볶이 메뉴</a></li>
+                        <li><a href="../community/community.html" aria-current="page">커뮤니티</a></li>
+                        <li><a href="../login/login.html">로그인/회원가입</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </dialog>
+        <div data-site-footer></div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        const menuButton = document.querySelector(".menu-button");
+        const siteMenu = document.querySelector("#site-menu");
+
+        menuButton.addEventListener("click", () => {
+            siteMenu.showModal();
+            menuButton.setAttribute("aria-expanded", "true");
+        });
+
+        siteMenu.addEventListener("click", (event) => {
+            if (event.target === siteMenu || event.target.closest("a")) {
+                siteMenu.close();
+            }
+        });
+
+        siteMenu.addEventListener("close", () => {
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.focus();
+        });
+
+        const reviewStorageKey = "ipdeokbokki.community.reviews";
+        const eventStorageKey = "ipdeokbokki.community.favorite-event.joined";
+        const reviewEditor = document.querySelector(".review-editor");
+        const reviewForm = document.querySelector("#review-form");
+        const reviewContent = document.querySelector("#review-content");
+        const reviewStatus = document.querySelector("#review-status");
+        const reviewEmpty = document.querySelector("#review-empty");
+        const reviewList = document.querySelector("#review-list");
+        const reviewTemplate = document.querySelector("#review-template");
+        const eventJoin = document.querySelector("#event-join");
+        const eventStatus = document.querySelector("#event-status");
+        const dateFormat = new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium" });
+        let reviews = [];
+
+        function renderReviews() {
+            const items = reviews.map((review) => {
+                const item = reviewTemplate.content.firstElementChild.cloneNode(true);
+                const date = item.querySelector(".review-card__date");
+
+                item.querySelector(".review-card__menu").textContent = review.menu;
+                item.querySelector(".review-card__rating").textContent = `★ ${review.rating} / 5`;
+                item.querySelector(".review-card__content").textContent = review.content;
+                date.dateTime = review.createdAt;
+                date.textContent = dateFormat.format(new Date(review.createdAt));
+
+                return item;
+            });
+
+            reviewList.replaceChildren(...items);
+            reviewEmpty.hidden = items.length > 0;
+        }
+
+        function showJoinedEvent() {
+            eventJoin.disabled = true;
+            eventJoin.textContent = "참여 완료";
+            eventStatus.textContent = "예시 이벤트 참여 기록이 저장됐어요.";
+        }
+
+        try {
+            const savedReviews = JSON.parse(localStorage.getItem(reviewStorageKey) ?? "[]");
+
+            if (Array.isArray(savedReviews)) {
+                reviews = savedReviews;
+            }
+
+            if (localStorage.getItem(eventStorageKey) === "true") {
+                showJoinedEvent();
+            }
+        } catch {
+            reviewStatus.textContent = "저장된 기록을 불러오지 못했어요.";
+        }
+
+        renderReviews();
+
+        reviewContent.addEventListener("input", () => {
+            reviewContent.setCustomValidity("");
+        });
+
+        reviewForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const fields = new FormData(reviewForm);
+            const content = reviewContent.value.trim();
+
+            if (!content) {
+                reviewContent.setCustomValidity("후기 내용을 입력해 주세요.");
+                reviewContent.reportValidity();
+                return;
+            }
+
+            const review = {
+                menu: fields.get("menu"),
+                rating: Number(fields.get("rating")),
+                content,
+                createdAt: new Date().toISOString()
+            };
+            const updatedReviews = [review, ...reviews];
+
+            try {
+                localStorage.setItem(reviewStorageKey, JSON.stringify(updatedReviews));
+            } catch {
+                reviewStatus.textContent = "후기를 저장하지 못했어요. 브라우저 저장 공간 설정을 확인해 주세요.";
+                return;
+            }
+
+            reviews = updatedReviews;
+            renderReviews();
+            reviewForm.reset();
+            reviewEditor.open = false;
+            reviewEditor.querySelector("summary").focus();
+            reviewStatus.textContent = "후기가 등록됐어요.";
+        });
+
+        eventJoin.addEventListener("click", () => {
+            if (reviews.length === 0) {
+                eventStatus.textContent = "후기를 한 개 이상 등록한 뒤 참여할 수 있어요.";
+                return;
+            }
+
+            try {
+                localStorage.setItem(eventStorageKey, "true");
+            } catch {
+                eventStatus.textContent = "참여 기록을 저장하지 못했어요. 다시 시도해 주세요.";
+                return;
+            }
+
+            showJoinedEvent();
+        });
+
+        window.lucide?.createIcons();
+    </script>
+</body>
+</html>

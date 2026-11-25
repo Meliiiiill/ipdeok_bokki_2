@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>결제 성공 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="complete-page">
+    <div data-site-header></div>
+
+    <main class="receipt">
+      <header class="success">
+        <div class="success-icon" aria-hidden="true"></div>
+        <h1>결제 성공!</h1>
+        <p>입덕할 준비 완료~ 두근두근 🧡</p>
+      </header>
+
+      <div class="receipt-card">
+        <dl class="order-meta">
+          <div>
+            <dt>주문 날짜</dt>
+            <dd><time datetime="2026-11-24">2026-11-24</time></dd>
+          </div>
+          <div>
+            <dt>주문 번호</dt>
+            <dd>0003542</dd>
+          </div>
+          <div>
+            <dt>주문 상태</dt>
+            <dd class="status">결제 완료</dd>
+          </div>
+        </dl>
+
+        <section aria-labelledby="order-title">
+          <h2 id="order-title">주문 메뉴</h2>
+
+          <div class="order-item">
+            <img src="../../img/menu/set_rose.png" alt="" width="72" height="72">
+
+            <div>
+              <div class="tags">
+                <span>매콤</span>
+                <span>달달</span>
+              </div>
+              <strong>둘이서 최애 세트 (3-4인)</strong>
+              <p>로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개</p>
+            </div>
+          </div>
+
+          <div class="order-price">36,000원</div>
+        </section>
+
+        <section aria-labelledby="payment-title">
+          <h2 id="payment-title">결제 정보</h2>
+
+          <dl class="price">
+            <div>
+              <dt>둘이서 최애 세트 (3-4인)</dt>
+              <dd>36,000원</dd>
+            </div>
+            <div class="coupon">
+              <dt>신규 가입 5% 할인 쿠폰</dt>
+              <dd>−1,800원</dd>
+            </div>
+            <div class="total">
+              <dt>총 결제금액</dt>
+              <dd>34,200원</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <div class="actions">
+        <a class="primary" href="../../index.html">확인완료</a>
+        <a class="secondary" href="../../index.html">주문 현황 보기</a>
+      </div>
+    </main>
+
+    <div data-site-footer></div>
+  </div>
+</body>
+</html>

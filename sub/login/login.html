@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로그인 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div data-site-header></div>
+
+    <main>
+      <section class="login-section" aria-labelledby="login-title">
+        <div class="login-intro">
+          <div class="login-mascot">
+            <img src="../../img/character/ipdeok_normal.png"
+                 width="1280" height="1280"
+                 alt="떡볶이 컵과 떡꼬치를 들고 있는 입덕이">
+          </div>
+          <h1 id="login-title">입덕볶이 로그인</h1>
+          <p>입덕이랑 오늘의 최애를 찾아봐요.</p>
+        </div>
+
+        <form id="login-form" class="login-form" method="post">
+          <div class="login-field">
+            <label for="login-email">이메일</label>
+            <input id="login-email" type="email"
+                   autocomplete="username" autocapitalize="none"
+                   placeholder="이메일을 입력해 주세요" required>
+          </div>
+
+          <div class="login-field">
+            <label for="login-password">비밀번호</label>
+            <div class="password-field">
+              <input id="login-password" type="password"
+                     autocomplete="current-password"
+                     placeholder="비밀번호를 입력해 주세요" required>
+
+              <button id="password-toggle" class="password-toggle" type="button"
+                      aria-controls="login-password" aria-label="비밀번호 보기" disabled>
+                보기
+              </button>
+            </div>
+          </div>
+
+          <button id="login-submit" class="login-submit" type="submit" disabled>
+            로그인
+          </button>
+
+          <p id="login-status" class="login-status" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+  </div>
+
+  <script>
+    const loginForm = document.querySelector("#login-form");
+    const loginPassword = document.querySelector("#login-password");
+    const passwordToggle = document.querySelector("#password-toggle");
+    const loginSubmit = document.querySelector("#login-submit");
+    const loginStatus = document.querySelector("#login-status");
+
+    passwordToggle.addEventListener("click", () => {
+      const showPassword = loginPassword.type === "password";
+
+      loginPassword.type = showPassword ? "text" : "password";
+      passwordToggle.textContent = showPassword ? "숨기기" : "보기";
+      passwordToggle.setAttribute(
+        "aria-label",
+        showPassword ? "비밀번호 숨기기" : "비밀번호 보기"
+      );
+    });
+
+    loginForm.addEventListener("input", () => {
+      loginStatus.textContent = "";
+    });
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      loginStatus.textContent = "로그인 기능은 준비 중이에요.";
+    });
+
+    passwordToggle.disabled = false;
+    loginSubmit.disabled = false;
+  </script>
+</body>
+</html>

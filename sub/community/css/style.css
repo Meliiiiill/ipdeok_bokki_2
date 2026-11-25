@@ -1,0 +1,490 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap");
+
+:root {
+  --page-max-width: 500px;
+  --page-gutter: 20px;
+  --brand: #d64920;
+  --brand-ink: #b53d1b;
+  --cream: #fcfce4;
+  --text: #222;
+  --muted: #666;
+  --line: #eee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  color: var(--text);
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-ink);
+  outline-offset: 3px;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  min-height: 100vh;
+  margin-inline: auto;
+  background: #fff;
+}
+
+/* 공통 헤더 */
+.site-header {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px var(--page-gutter);
+  background: linear-gradient(rgb(24 12 7 / 46%), transparent);
+}
+
+.site-home {
+  display: grid;
+  min-height: 44px;
+  align-items: center;
+}
+
+.site-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 22%));
+}
+
+.menu-button,
+.menu-close {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.site-header .menu-button {
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 55%));
+}
+
+.menu-button svg,
+.menu-close svg {
+  width: 29px;
+  height: 29px;
+  stroke-width: 1.2;
+}
+
+.site-header :focus-visible {
+  outline-color: #fff;
+}
+
+/* 커뮤니티 소개와 바로가기 */
+.community-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(84px, 26vw, 118px);
+  align-items: center;
+  gap: 10px;
+  padding: 22px 28px 22px 40px;
+  background: var(--cream);
+}
+
+.community-hero h1 {
+  margin: 0;
+  color: var(--brand-ink);
+  font-size: clamp(24px, 6.6vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  word-break: keep-all;
+}
+
+.community-hero p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.community-hero__mascot {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 8px rgb(100 46 18 / 14%));
+}
+
+.community-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px var(--page-gutter);
+  border-bottom: 1px solid var(--line);
+}
+
+.pill-link,
+.primary-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border: 1px solid var(--brand);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pill-link {
+  background-color: #fff;
+  background-image: linear-gradient(var(--brand-ink), var(--brand-ink));
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 0%;
+  color: var(--brand-ink);
+  transition: background-size 240ms ease-out, color 240ms ease-out;
+}
+
+.pill-link:focus-visible {
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+@media (hover: hover) {
+  .pill-link:not(:disabled):hover {
+    background-size: 100% 100%;
+    color: #fff;
+  }
+}
+
+.pill-link:disabled {
+  border-color: #eee;
+  background: #f3f3f3;
+  color: #666;
+  cursor: default;
+}
+
+.primary-button {
+  border-color: var(--brand-ink);
+  border-radius: 14px;
+  background: var(--brand-ink);
+  color: #fff;
+}
+
+/* 후기 */
+.community-section {
+  padding: 48px var(--page-gutter);
+  scroll-margin-top: 16px;
+}
+
+.community-section h2 {
+  margin: 0 0 20px;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.review-editor {
+  text-align: center;
+}
+
+.review-editor summary {
+  list-style: none;
+}
+
+.review-editor summary::-webkit-details-marker {
+  display: none;
+}
+
+.review-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  text-align: left;
+}
+
+.review-form label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.review-form select {
+  margin-bottom: 6px;
+}
+
+.review-form textarea {
+  resize: vertical;
+}
+
+.review-form .primary-button {
+  margin-top: 8px;
+}
+
+.status-message,
+.empty-message {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.status-message {
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.status-message:empty {
+  margin: 0;
+}
+
+.empty-message {
+  margin: 20px 0 0;
+  padding: 20px 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.review-list {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.review-list:empty {
+  margin: 0;
+}
+
+.review-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.review-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.review-card h3,
+.review-card p {
+  margin: 0;
+}
+
+.review-card h3 {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.review-card__date {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.review-card .review-card__rating {
+  margin-top: 6px;
+  color: var(--brand-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-card .review-card__content {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* 이벤트와 뉴스 */
+.event-section {
+  background: #fff8f3;
+}
+
+.community-card {
+  display: grid;
+  grid-template-columns: clamp(56px, 19vw, 80px) minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.community-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: #fff0e6;
+  object-fit: contain;
+}
+
+.community-card__copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.community-card__label {
+  margin: 0 0 4px;
+  color: var(--brand-ink);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.community-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.community-card__description {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.community-card .pill-link {
+  margin-top: 10px;
+}
+
+.community-card .status-message {
+  text-align: left;
+}
+
+/* 햄버거 슬라이드 메뉴 */
+.menu-drawer {
+  position: fixed;
+  inset: 0;
+  width: min(100%, var(--page-max-width));
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+}
+
+.menu-drawer::backdrop {
+  background: rgb(0 0 0 / 35%);
+}
+
+.menu-drawer__panel {
+  width: 66.6667%;
+  height: 100%;
+  margin-inline-start: auto;
+  padding: 0 var(--page-gutter);
+  overflow-y: auto;
+  background: #fff;
+}
+
+.menu-drawer[open] .menu-drawer__panel {
+  animation: menu-slide-in 220ms ease-out;
+}
+
+@keyframes menu-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.menu-drawer__controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 60px;
+}
+
+.menu-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-links a {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.menu-links a[aria-current="page"] {
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-drawer[open] .menu-drawer__panel {
+    animation: none;
+  }
+
+  .pill-link {
+    transition: none;
+  }
+}
+
+body .page .site-header .site-logo {
+  filter: none;
+}
+
+body .page .site-header .menu-button {
+  color: #222;
+  filter: none;
+}

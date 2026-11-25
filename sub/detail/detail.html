@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>메뉴 상세 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div data-site-header></div>
+
+    <main class="menu-detail">
+      <article aria-labelledby="detail-title">
+        <div class="detail-visual" data-flavor="original">
+          <img id="detail-image" src="../../img/menu/normal.png" alt="">
+        </div>
+
+        <div class="detail-body">
+          <h1 id="detail-title">첫입 오리지널 떡볶이</h1>
+          <p id="detail-description">달콤하고 매콤한 양념에 쫄깃한 떡을 버무린 기본 떡볶이예요.</p>
+        </div>
+
+        <form class="order-form" action="../payments/payments.html" method="get" target="_top">
+          <input id="order-menu" type="hidden" name="menu" value="original">
+
+          <fieldset>
+            <legend>인원 선택</legend>
+            <div class="option-grid">
+              <label class="order-option">
+                <input type="radio" name="serving" value="small" checked>
+                <span>1–2인 <small id="serving-small-price">15,000원</small></span>
+              </label>
+              <label class="order-option">
+                <input type="radio" name="serving" value="large">
+                <span>3–4인 <small id="serving-large-price">25,000원</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="main-quantity">
+            <strong>본품 수량</strong>
+            <div id="main-quantity-control"></div>
+            <input id="main-quantity" type="hidden" name="quantity" value="1">
+          </div>
+
+          <fieldset>
+            <legend>토핑 추가</legend>
+            <div class="option-grid">
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="boiled-egg" data-price="1000">
+                <span>삶은 달걀 1개 <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="wheat-rice-cakes" data-price="1500">
+                <span>밀떡 추가 <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="fish-cake" data-price="1500">
+                <span>어묵 추가 <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="glass-noodles" data-price="2000">
+                <span>중국당면 추가 <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="bunmoja" data-price="2000">
+                <span>분모자 추가 <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="topping" value="mozzarella" data-price="3000">
+                <span>모차렐라 치즈 추가 <small data-option-price></small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>단무지</legend>
+            <div class="option-grid">
+              <label class="order-option">
+                <input type="radio" name="radish" value="no" checked>
+                <span>단무지 추가 안 함 <small class="radish-note">(기본 1팩 제공)</small></span>
+              </label>
+              <label class="order-option">
+                <input type="radio" name="radish" value="yes" data-price="500">
+                <span>단무지 추가 1팩 <small data-option-price></small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>음료 추가</legend>
+            <div class="option-grid">
+              <label class="order-option">
+                <input type="checkbox" name="drink" value="cola" data-price="2000">
+                <span>콜라 355ml <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="drink" value="zero-cola" data-price="2000">
+                <span>제로콜라 355ml <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="drink" value="cider" data-price="2000">
+                <span>사이다 355ml <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="drink" value="coolpis-peach" data-price="2000">
+                <span>쿨피스 복숭아 450ml <small data-option-price></small></span>
+              </label>
+              <label class="order-option">
+                <input type="checkbox" name="drink" value="water" data-price="1000">
+                <span>생수 500ml <small data-option-price></small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>사이드 추가</legend>
+            <div class="side-list">
+              <label class="side-card">
+                <input type="checkbox" name="side" value="sundae" data-price="4500">
+                <span class="side-info">
+                  <strong>쫄깃 찰순대</strong>
+                  <span class="side-description">1접시</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="assorted-fritters" data-price="5500">
+                <span class="side-info">
+                  <strong>찍먹 모둠튀김</strong>
+                  <span class="side-description">김말이 2개, 오징어 2개, 야채만두 1개</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="rice-ball" data-price="3000">
+                <span class="side-info">
+                  <strong>꼬소 김가루 주먹밥</strong>
+                  <span class="side-description">미니 4개</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="spicy-gimbap" data-price="6000">
+                <span class="side-info">
+                  <strong>빨간 입덕김밥</strong>
+                  <span class="side-description">매콤 참치밥과 치즈, 1줄</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="butter-toast" data-price="4500">
+                <span class="side-info">
+                  <strong>딸기잼 달걀 버터토스트</strong>
+                  <span class="side-description">1개, 반으로 컷</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="cheese-ball" data-price="4000">
+                <span class="side-info">
+                  <strong>한입 치즈볼</strong>
+                  <span class="side-description">4개</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+
+              <label class="side-card">
+                <input type="checkbox" name="side" value="seaweed-roll" data-price="2500">
+                <span class="side-info">
+                  <strong>최애 김말이</strong>
+                  <span class="side-description">3개</span>
+                </span>
+                <small data-option-price></small>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="detail-summary">
+            <div class="detail-total">
+              <strong id="detail-total-label">총 가격</strong>
+              <output id="detail-total-price" aria-labelledby="detail-total-label"
+                      aria-live="polite">15,000원</output>
+            </div>
+            <div class="detail-actions">
+              <a class="detail-cart" href="#">장바구니 담기</a>
+              <button class="detail-pay" type="submit">결제하기</button>
+            </div>
+          </div>
+        </form>
+      </article>
+    </main>
+
+    <div data-site-footer></div>
+  </div>
+
+  <script>
+    const menuItems = {
+      original: {
+        name: "첫입 오리지널 떡볶이",
+        image: "normal.png",
+        description: "달콤하고 매콤한 양념에 쫄깃한 떡을 버무린 기본 떡볶이예요.",
+        flavor: "original",
+        prices: { small: 15000, large: 25000 }
+      },
+      rose: {
+        name: "최애 로제 떡볶이",
+        image: "rose.png",
+        description: "매콤한 떡볶이 양념에 부드러운 크림 맛이 어우러진 로제 떡볶이예요.",
+        flavor: "rose",
+        prices: { small: 18000, large: 30000 }
+      },
+      cheese: {
+        name: "치즈 폭탄 떡볶이",
+        image: "cheese.png",
+        description: "매콤한 떡볶이에 고소한 치즈를 듬뿍 얹었어요.",
+        flavor: "cheese",
+        prices: { small: 18000, large: 30000 }
+      },
+      spicy: {
+        name: "불꽃 입덕 떡볶이",
+        image: "spicy.png",
+        description: "한입부터 화끈한 매운맛이 퍼지는 떡볶이예요.",
+        flavor: "spicy",
+        prices: { small: 17000, large: 28000 }
+      },
+      "set-ipdeok": {
+        name: "입덕 스타터 세트",
+        image: "set_ipdeok.png",
+        description: "오리지널 떡볶이, 모둠튀김(김말이 2개, 오징어 2개, 야채만두 1개), 미니 주먹밥",
+        flavor: "original",
+        prices: { small: 22000, large: 31000 }
+      },
+      "set-rose": {
+        name: "둘이서 최애 세트",
+        image: "set_rose.png",
+        description: "로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개",
+        flavor: "rose",
+        prices: { small: 25000, large: 36000 }
+      }
+    };
+
+    const requestedMenu = new URLSearchParams(location.search).get("menu");
+    const menuKey = Object.hasOwn(menuItems, requestedMenu) ? requestedMenu : "original";
+    const selectedMenu = menuItems[menuKey];
+
+    document.title = `${selectedMenu.name} | 입덕볶이`;
+    document.querySelector(".detail-visual").dataset.flavor = selectedMenu.flavor;
+    document.querySelector("#detail-image").src = `../../img/menu/${selectedMenu.image}`;
+    document.querySelector("#detail-title").textContent = selectedMenu.name;
+    document.querySelector("#detail-description").textContent = selectedMenu.description;
+    document.querySelector("#order-menu").value = menuKey;
+
+    const orderForm = document.querySelector(".order-form");
+    const totalPrice = document.querySelector("#detail-total-price");
+    const mainQuantity = document.querySelector("#main-quantity");
+    const pricedOptions = [...orderForm.querySelectorAll("input[data-price]")];
+    const optionQuantities = new Map();
+    const priceFormat = new Intl.NumberFormat("ko-KR");
+
+    function formatPrice(amount) {
+      return `${priceFormat.format(amount)}원`;
+    }
+
+    document.querySelector("#serving-small-price").textContent =
+      formatPrice(selectedMenu.prices.small);
+    document.querySelector("#serving-large-price").textContent =
+      formatPrice(selectedMenu.prices.large);
+
+    pricedOptions.forEach((input) => {
+      const priceLabel = input.closest("label").querySelector("[data-option-price]");
+      priceLabel.textContent = `+${formatPrice(Number(input.dataset.price))}`;
+    });
+
+    function makeQuantityControl(label, initialValue, minimum, onChange) {
+      const control = document.createElement("div");
+      control.className = "quantity-control";
+      control.setAttribute("role", "group");
+      control.setAttribute("aria-label", `${label} 수량`);
+
+      const decrease = document.createElement("button");
+      decrease.type = "button";
+      decrease.textContent = "−";
+      decrease.setAttribute("aria-label", `${label} 수량 줄이기`);
+
+      const count = document.createElement("span");
+      count.className = "quantity-count";
+      count.setAttribute("aria-live", "polite");
+
+      const increase = document.createElement("button");
+      increase.type = "button";
+      increase.textContent = "+";
+      increase.setAttribute("aria-label", `${label} 수량 늘리기`);
+
+      let quantity = initialValue;
+
+      function setQuantity(value) {
+        quantity = Math.max(minimum, value);
+        count.textContent = quantity;
+        decrease.disabled = quantity === minimum;
+      }
+
+      decrease.addEventListener("click", () => {
+        setQuantity(quantity - 1);
+        onChange(quantity);
+      });
+
+      increase.addEventListener("click", () => {
+        setQuantity(quantity + 1);
+        onChange(quantity);
+      });
+
+      control.append(decrease, count, increase);
+      setQuantity(initialValue);
+
+      return { control, setQuantity };
+    }
+
+    const mainControl = makeQuantityControl("본품", 1, 1, (quantity) => {
+      mainQuantity.value = quantity;
+      updateTotalPrice();
+    });
+
+    document.querySelector("#main-quantity-control").append(mainControl.control);
+
+    pricedOptions.forEach((input) => {
+      const option = input.closest("label");
+      const sideName = option.querySelector(".side-info strong");
+      const optionName = option.querySelector("span");
+      const label = sideName
+        ? sideName.textContent.trim()
+        : optionName.firstChild.textContent.trim();
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "quantity-option";
+
+      const quantityInput = document.createElement("input");
+      quantityInput.type = "hidden";
+      quantityInput.name = `qty-${input.name}-${input.value}`;
+      quantityInput.value = input.checked ? "1" : "0";
+      quantityInput.disabled = !input.checked;
+
+      const stepper = makeQuantityControl(label, Number(quantityInput.value), 0, (quantity) => {
+        if (input.name === "radish" && quantity === 0) {
+          orderForm.elements.namedItem("radish").value = "no";
+        } else {
+          input.checked = quantity > 0;
+        }
+
+        quantityInput.value = quantity;
+        syncOptionQuantities();
+        updateTotalPrice();
+      });
+
+      option.before(wrapper);
+      wrapper.append(option, stepper.control, quantityInput);
+      optionQuantities.set(input, { quantityInput, stepper });
+    });
+
+    function syncOptionQuantities() {
+      optionQuantities.forEach(({ quantityInput, stepper }, input) => {
+        const quantity = input.checked ? Math.max(1, Number(quantityInput.value)) : 0;
+
+        quantityInput.value = quantity;
+        quantityInput.disabled = !input.checked;
+        stepper.setQuantity(quantity);
+      });
+    }
+
+    function updateTotalPrice() {
+      const serving = orderForm.elements.namedItem("serving").value;
+      const basePrice = selectedMenu.prices[serving] * Number(mainQuantity.value);
+
+      const extras = pricedOptions.reduce((total, input) => {
+        if (!input.checked) return total;
+
+        const { quantityInput } = optionQuantities.get(input);
+        return total + Number(input.dataset.price) * Number(quantityInput.value);
+      }, 0);
+
+      totalPrice.value = formatPrice(basePrice + extras);
+    }
+
+    function refreshOrderTotal() {
+      mainControl.setQuantity(Number(mainQuantity.value));
+      syncOptionQuantities();
+      updateTotalPrice();
+    }
+
+    orderForm.addEventListener("change", refreshOrderTotal);
+    window.addEventListener("pageshow", refreshOrderTotal);
+    refreshOrderTotal();
+
+    if (window.self !== window.top) {
+      document.querySelector("[data-site-footer]").remove();
+
+      document.querySelector("[data-site-header]").addEventListener("click", (event) => {
+        const link = event.target.closest("a");
+        if (link) link.target = "_top";
+      }, { capture: true });
+    }
+
+    const detailSummary = document.querySelector(".detail-summary");
+
+    function reserveDetailSummarySpace() {
+      const height = detailSummary.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--detail-summary-height", `${height}px`);
+    }
+
+    reserveDetailSummarySpace();
+    new ResizeObserver(reserveDetailSummarySpace).observe(detailSummary);
+  </script>
+</body>
+</html>

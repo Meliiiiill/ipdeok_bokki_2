@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap");
+
+:root {
+  --page-max-width: 500px;
+  --page-gutter: 20px;
+  --brand: #d64920;
+  --brand-ink: #a93617;
+  --cream: #fcfce4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  color: #222;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--brand-ink);
+  outline-offset: 4px;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: var(--page-max-width);
+  min-height: 100vh;
+  margin-inline: auto;
+  background: #fff;
+}
+
+/* 메인과 공통인 헤더 */
+.site-header {
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 auto;
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px var(--page-gutter);
+  background: linear-gradient(rgb(24 12 7 / 46%), transparent);
+}
+
+
+
+.site-home {
+  display: grid;
+  min-height: 44px;
+  align-items: center;
+}
+
+.site-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 22%));
+}
+
+.menu-button,
+.menu-close {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.site-header .menu-button {
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 55%));
+}
+
+.menu-button svg,
+.menu-close svg {
+  width: 29px;
+  height: 29px;
+  stroke-width: 1.2;
+}
+
+.site-header :focus-visible { outline-color: #fff; }
+
+/* 첫 화면 */
+.about-hero {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 76px var(--page-gutter) 44px;
+  background: radial-gradient(ellipse at 50% 32%, #dc6336, #9c2d16 78%);
+  color: #fff;
+  text-align: center;
+}
+
+.about-hero__image {
+  display: block;
+  width: min(100%, 350px);
+  height: auto;
+  filter: drop-shadow(0 14px 18px rgb(60 17 8 / 28%));
+}
+
+.about-hero h1 {
+  margin: 0;
+  font-size: clamp(32px, 9vw, 46px);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -.055em;
+}
+
+.about-hero p {
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* 창업 이야기와 맛 */
+.about-story,
+.about-taste,
+.about-cta {
+  padding: 56px var(--page-gutter);
+}
+
+main h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -.035em;
+  word-break: keep-all;
+}
+
+.story-chapter {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #eee;
+}
+
+.story-chapter h3 {
+  margin: 0 0 8px;
+  color: var(--brand-ink);
+  font-size: 17px;
+}
+
+.story-chapter p,
+.about-taste p {
+  margin: 8px 0 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.story-chapter blockquote {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-inline-start: 3px solid var(--brand);
+  background: #fff1e8;
+  color: var(--brand-ink);
+  font-weight: 800;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.about-taste { background: var(--cream); }
+
+.taste-list {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.taste-list li {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.taste-list img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* 메뉴 연결 */
+.about-cta { text-align: center; }
+
+.about-menu-link {
+  display: inline-grid;
+  min-height: 48px;
+  place-items: center;
+  margin-top: 20px;
+  padding: 8px 24px;
+  border: 1px solid var(--brand-ink);
+  border-radius: 999px;
+  background: var(--brand-ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* 공통 햄버거 슬라이드 메뉴 */
+.menu-drawer {
+  position: fixed;
+  inset: 0;
+  width: min(100%, var(--page-max-width));
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+}
+
+.menu-drawer::backdrop { background: rgb(0 0 0 / 35%); }
+
+.menu-drawer__panel {
+  width: 66.6667%;
+  height: 100%;
+  margin-inline-start: auto;
+  padding-inline: var(--page-gutter);
+  overflow-y: auto;
+  background: #fff;
+}
+
+.menu-drawer[open] .menu-drawer__panel {
+  animation: menu-slide-in 220ms ease-out;
+}
+
+@keyframes menu-slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.menu-drawer__controls {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menu-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-links a {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-drawer[open] .menu-drawer__panel { animation: none; }
+}
+
+.about-menu-link {
+  background-color: #fff;
+  color: #a92521;
+  animation: menu-button-color 2s ease-in-out infinite alternate;
+}
+
+@keyframes menu-button-color {
+  0%, 15% {
+    background-color: #fff;
+    color: #a92521;
+  }
+
+  85%, 100% {
+    background-color: #a92521;
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-menu-link {
+    animation: none;
+    background-color: #a92521;
+    color: #fff;
+  }
+}
+
+.taste-list li > span {
+  min-width: 0;
+}
+
+.taste-detail-button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  margin-inline-start: auto;
+  padding: 4px 9px;
+  border: 1px solid var(--brand);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brand-ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.taste-dialog {
+  position: fixed;
+  inset: auto 0 0;
+  width: min(100%, var(--page-max-width));
+  max-width: none;
+  max-height: 88dvh;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 20px 20px 0 0;
+  color: #222;
+}
+
+.taste-dialog[open] {
+  animation: taste-dialog-in 260ms ease-out;
+}
+
+.taste-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.taste-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px 6px var(--page-gutter);
+  border-bottom: 1px solid #eee;
+}
+
+.taste-dialog__header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.taste-dialog__header button {
+  font-size: 26px;
+}
+
+#taste-detail-frame {
+  width: 100%;
+  height: 76dvh;
+  border: 0;
+}
+
+#taste-detail-frame:not([hidden]) {
+  display: block;
+}
+
+.taste-dialog__body {
+  padding: 16px var(--page-gutter) calc(24px + env(safe-area-inset-bottom, 0px));
+  line-height: 1.65;
+}
+
+.taste-dialog__body p {
+  margin: 0;
+}
+
+@keyframes taste-dialog-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .taste-dialog[open] {
+    animation: none;
+  }
+}
+
+body .page .site-header .site-logo {
+  filter: none;
+}
+
+body .page .site-header .menu-button {
+  color: #222;
+  filter: none;
+}

@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap");
+
+:root {
+  --page-max-width: 500px;
+  --page-gutter: 20px;
+  --brand: #d64920;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f3f3;
+  color: #171717;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.complete-page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  min-height: 100vh;
+  margin-inline: auto;
+  background: #fff;
+}
+
+/* 결제 성공 안내 */
+.receipt {
+  padding: 24px var(--page-gutter) 32px;
+}
+
+.success {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.success-icon {
+  display: grid;
+  width: 88px;
+  height: 88px;
+  place-items: center;
+  margin: 0 auto 14px;
+  border: 8px solid #f7d8ce;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.success-icon::after {
+  width: 15px;
+  height: 28px;
+  border: solid #fff;
+  border-width: 0 4px 4px 0;
+  transform: translateY(-3px) rotate(45deg);
+  content: "";
+}
+
+.success h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.success p {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 주문 내역 */
+.receipt-card {
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.receipt-card dl,
+.receipt-card dd {
+  margin: 0;
+}
+
+.order-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  text-align: center;
+}
+
+.order-meta dt {
+  color: #666;
+  font-size: 12px;
+}
+
+.order-meta dd {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.order-meta .status {
+  color: var(--brand);
+}
+
+.receipt-card section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #eee;
+}
+
+.receipt-card h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item img {
+  flex: 0 0 72px;
+  object-fit: contain;
+}
+
+.order-item strong {
+  display: block;
+  font-size: 14px;
+}
+
+.order-item p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 12px;
+}
+
+.order-price {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: end;
+}
+
+.tags {
+  margin-bottom: 3px;
+}
+
+.tags span {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 9px;
+}
+
+.tags span + span {
+  background: #d9407d;
+}
+
+/* 결제 금액 */
+.price > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+}
+
+.price dd {
+  white-space: nowrap;
+}
+
+.price .coupon {
+  margin-top: 4px;
+  border-top: 1px solid #eee;
+  color: #666;
+  font-size: 12px;
+}
+
+.price .total {
+  margin-top: 5px;
+  font-weight: 800;
+}
+
+.total dd {
+  color: var(--brand);
+  font-size: 21px;
+}
+
+/* 하단 버튼 */
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.actions a {
+  padding: 13px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.actions .primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.actions .secondary {
+  background: #fff0eb;
+  color: #a83918;
+}
