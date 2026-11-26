@@ -101,6 +101,11 @@ html:has(.detail-sheet[open]) {
   margin-bottom: 12px;
 }
 
+.catalog-tags--empty {
+  min-height: calc(1lh + 4px);
+  font-size: 9px;
+}
+
 .catalog-image-placeholder {
   aspect-ratio: 1;
   border-radius: 12px;
@@ -287,4 +292,18 @@ html:has(.detail-sheet[open]) {
   .detail-sheet[open] .detail-sheet__panel {
     animation: none;
   }
+}
+
+
+.detail-sheet__side {
+  padding: 0 var(--page-gutter) 24px;
+}
+
+.detail-sheet__side .catalog-visual {
+  width: min(100%, 240px);
+  margin: 0 auto 12px;
+}
+
+.detail-sheet__side .catalog-prices {
+  margin-top: 12px;
 }

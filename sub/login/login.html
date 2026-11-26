@@ -10,6 +10,9 @@
 
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <script defer src="../../js/layout.js"></script>
+  <style>
+    #return-to-order[hidden] { display: none; }
+  </style>
 </head>
 <body>
   <div class="page">
@@ -104,6 +107,10 @@
             <p id="signed-in-email"></p>
 
             <div class="signed-in-actions">
+              <a id="return-to-order" class="login-submit"
+                 href="../lists/lists.html?resumeCheckout=1" hidden>
+                주문 화면으로 돌아가기
+              </a>
               <a id="mypage-link" class="login-submit" href="../mypage/mypage.html">
                 마이페이지 가기
               </a>
@@ -139,6 +146,8 @@
       const signupConfirm = document.querySelector("#signup-confirm");
       const signedIn = document.querySelector("#signed-in");
       const signedInEmail = document.querySelector("#signed-in-email");
+      const returnToOrder = document.querySelector("#return-to-order");
+      const resumeCheckout = new URLSearchParams(location.search).get("resumeCheckout") === "1";
       const mypageLink = document.querySelector("#mypage-link");
       const status = document.querySelector("#login-status");
       const loginSubmit = loginForm.querySelector('[type="submit"]');
@@ -162,6 +171,8 @@
 
       function renderSession() {
         const user = auth.currentUser();
+        const draft = resumeCheckout && sessionStorage.getItem("ipdeokbokki.checkoutDraft");
+        returnToOrder.hidden = !user || !draft;
 
         authForms.hidden = Boolean(user);
         signedIn.hidden = !user;
@@ -254,7 +265,7 @@
           loginForm.reset();
           setPasswordVisible(false);
           renderSession();
-          mypageLink.focus();
+          (returnToOrder.hidden ? mypageLink : returnToOrder).focus();
         } catch (error) {
           loginEmail.setAttribute("aria-invalid", "true");
           password.setAttribute("aria-invalid", "true");

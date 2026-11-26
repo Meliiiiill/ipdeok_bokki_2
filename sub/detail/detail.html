@@ -10,6 +10,43 @@
 
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <script defer src="../../js/layout.js"></script>
+  <style>
+    #checkout-login-dialog {
+      box-sizing: border-box;
+      width: min(380px, calc(100% - 40px));
+      padding: 24px;
+      border: 0;
+      border-radius: 16px;
+      color: #28211e;
+    }
+
+    #checkout-login-dialog::backdrop {
+      background: rgb(0 0 0 / 45%);
+    }
+
+    .checkout-login-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .checkout-login-actions button {
+      flex: 1;
+      min-height: 44px;
+      padding: 8px;
+      border: 1px solid #d64920;
+      border-radius: 8px;
+      background: white;
+      color: #9e3012;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .checkout-login-actions #checkout-login-go {
+      background: #b53a17;
+      color: white;
+    }
+  </style>
 </head>
 <body>
   <div class="page">
@@ -31,10 +68,10 @@
              data-spice="" data-spice-description hidden></p>
         </div>
 
-        <form class="order-form" action="../payments/payments.html" method="get" target="_top">
+        <form class="order-form" method="get" target="_top">
           <input id="order-menu" type="hidden" name="menu" value="original">
 
-          <fieldset>
+          <fieldset id="serving-options">
             <legend>인원 선택</legend>
             <div class="option-grid">
               <label class="order-option">
@@ -49,12 +86,12 @@
           </fieldset>
 
           <div class="main-quantity">
-            <strong>본품 수량</strong>
+            <strong id="main-quantity-label">본품 수량</strong>
             <div id="main-quantity-control"></div>
             <input id="main-quantity" type="hidden" name="quantity" value="1">
           </div>
 
-          <fieldset>
+          <fieldset id="topping-options">
             <legend>토핑 추가</legend>
             <div class="option-grid">
               <label class="order-option">
@@ -200,7 +237,7 @@
             </div>
             <div class="detail-actions">
               <a class="detail-cart" href="#">장바구니 담기</a>
-              <button class="detail-pay" type="submit">결제하기</button>
+              <button class="detail-pay" type="submit" disabled>결제하기</button>
             </div>
           </div>
         </form>
@@ -210,6 +247,15 @@
     <div data-site-footer></div>
   </div>
 
+  <dialog id="checkout-login-dialog" aria-labelledby="checkout-login-title">
+    <h2 id="checkout-login-title">결제하려면 로그인이 필요해요.</h2>
+    <form method="dialog" class="checkout-login-actions">
+      <button type="submit" autofocus>취소</button>
+      <button id="checkout-login-go" type="button">로그인하러 가기</button>
+    </form>
+  </dialog>
+
+  <script src="../../js/auth.js"></script>
   <script>
     const menuItems = {
       original: {
@@ -256,12 +302,58 @@
       }
     };
 
+    const sideMenus = {
+      "side-sundae": {
+        "name": "쫄깃 찰순대",
+        "image": "side_soondae.png",
+        "description": "쫄깃한 당면순대. 떡볶이 소스에 콕 찍어 먹기 좋아요",
+        "price": 4500
+      },
+      "side-assorted-fritters": {
+        "name": "찍먹 모둠튀김",
+        "image": "side_tempura.png",
+        "description": "김말이·오징어·야채만두를 한 접시에 담은 튀김 세트",
+        "price": 5500
+      },
+      "side-rice-ball": {
+        "name": "꼬소 김가루 주먹밥",
+        "image": "side_riceball.png",
+        "description": "김가루와 참기름을 넣어 고소하게 뭉친 주먹밥",
+        "price": 3000
+      },
+      "side-spicy-gimbap": {
+        "name": "빨간 입덕김밥",
+        "image": "side_gimbab.png",
+        "description": "매콤한 입덕 소스와 참치를 비빈 밥에 치즈를 넣어 완벽하게",
+        "price": 6000
+      },
+      "side-butter-toast": {
+        "name": "딸기잼 달걀 버터토스트",
+        "image": "side_toast.png",
+        "description": "식빵에 딸기잼을 바르고 달걀을 끼워 버터에 노릇하게 구웠어요",
+        "price": 4500
+      },
+      "side-cheese-ball": {
+        "name": "한입 치즈볼",
+        "image": "side_cheeseball.png",
+        "description": "바삭한 한입 속에 부드럽게 녹아드는 치즈",
+        "price": 4000
+      },
+      "side-seaweed-roll": {
+        "name": "최애 김말이",
+        "image": "side_gimmari.png",
+        "description": "당면을 김에 돌돌 말아 겉은 바삭, 속은 쫄깃하게",
+        "price": 2500
+      }
+    };
+
     const requestedMenu = new URLSearchParams(location.search).get("menu");
-    const menuKey = Object.hasOwn(menuItems, requestedMenu) ? requestedMenu : "original";
-    const selectedMenu = menuItems[menuKey];
+    const isSide = Object.hasOwn(sideMenus, requestedMenu);
+    const menuKey = isSide || Object.hasOwn(menuItems, requestedMenu) ? requestedMenu : "original";
+    const selectedMenu = isSide ? sideMenus[menuKey] : menuItems[menuKey];
 
     document.title = `${selectedMenu.name} | 입덕볶이`;
-    document.querySelector(".detail-visual").dataset.flavor = selectedMenu.flavor;
+    document.querySelector(".detail-visual").dataset.flavor = isSide ? "side" : selectedMenu.flavor;
     document.querySelector("#detail-image").src = `../../img/menu/${selectedMenu.image}`;
     document.querySelector("#detail-title").textContent = selectedMenu.name;
     document.querySelector("#detail-description").textContent = selectedMenu.description;
@@ -272,7 +364,6 @@
     const orderForm = document.querySelector(".order-form");
     const totalPrice = document.querySelector("#detail-total-price");
     const mainQuantity = document.querySelector("#main-quantity");
-    const pricedOptions = [...orderForm.querySelectorAll("input[data-price]")];
     const optionQuantities = new Map();
     const priceFormat = new Intl.NumberFormat("ko-KR");
 
@@ -280,10 +371,18 @@
       return `${priceFormat.format(amount)}원`;
     }
 
-    document.querySelector("#serving-small-price").textContent =
-      formatPrice(selectedMenu.prices.small);
-    document.querySelector("#serving-large-price").textContent =
-      formatPrice(selectedMenu.prices.large);
+    if (isSide) {
+      document.querySelector("#serving-options").remove();
+      document.querySelector("#topping-options").remove();
+      document.querySelector("#main-quantity-label").textContent = "사이드 수량";
+    } else {
+      document.querySelector("#serving-small-price").textContent =
+        formatPrice(selectedMenu.prices.small);
+      document.querySelector("#serving-large-price").textContent =
+        formatPrice(selectedMenu.prices.large);
+    }
+
+    const pricedOptions = [...orderForm.querySelectorAll("input[data-price]")];
 
     pricedOptions.forEach((input) => {
       const priceLabel = input.closest("label").querySelector("[data-option-price]");
@@ -334,7 +433,7 @@
       return { control, setQuantity };
     }
 
-    const mainControl = makeQuantityControl("본품", 1, 1, (quantity) => {
+    const mainControl = makeQuantityControl(isSide ? "사이드" : "본품", 1, 1, (quantity) => {
       mainQuantity.value = quantity;
       updateTotalPrice();
     });
@@ -386,8 +485,10 @@
     }
 
     function updateTotalPrice() {
-      const serving = orderForm.elements.namedItem("serving").value;
-      const basePrice = selectedMenu.prices[serving] * Number(mainQuantity.value);
+      const unitPrice = isSide
+        ? selectedMenu.price
+        : selectedMenu.prices[orderForm.elements.namedItem("serving").value];
+      const basePrice = unitPrice * Number(mainQuantity.value);
 
       const extras = pricedOptions.reduce((total, input) => {
         if (!input.checked) return total;
@@ -405,9 +506,80 @@
       updateTotalPrice();
     }
 
+    const checkoutDraftKey = "ipdeokbokki.checkoutDraft";
+
+    function restoreCheckoutDraft() {
+      if (new URLSearchParams(location.search).get("resumeCheckout") !== "1") return;
+
+      const savedOrder = sessionStorage.getItem(checkoutDraftKey);
+      if (!savedOrder) return;
+
+      const draft = new URLSearchParams(savedOrder);
+      if (draft.get("menu") !== menuKey) return;
+
+      const serving = draft.get("serving");
+      if (!isSide && Object.hasOwn(selectedMenu.prices, serving)) {
+        orderForm.elements.namedItem("serving").value = serving;
+      }
+
+      const quantity = Number(draft.get("quantity"));
+      if (Number.isSafeInteger(quantity) && quantity >= 1) {
+        mainQuantity.value = quantity;
+      }
+
+      orderForm.elements.namedItem("radish").value =
+        draft.get("radish") === "yes" ? "yes" : "no";
+
+      optionQuantities.forEach(({ quantityInput }, input) => {
+        if (input.type === "checkbox") {
+          input.checked = draft.getAll(input.name).includes(input.value);
+        }
+
+        const savedQuantity = Number(draft.get(quantityInput.name));
+        quantityInput.value = Number.isSafeInteger(savedQuantity) && savedQuantity >= 1
+          ? savedQuantity
+          : 0;
+      });
+
+      sessionStorage.removeItem(checkoutDraftKey);
+    }
+
+    const checkoutLoginDialog = document.querySelector("#checkout-login-dialog");
+
+    orderForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      let user;
+      try {
+        user = window.IpdeokAuth?.currentUser?.();
+      } catch {
+        user = null;
+      }
+
+      if (!user) {
+        if (!checkoutLoginDialog.open) checkoutLoginDialog.showModal();
+        return;
+      }
+
+      const paymentUrl = new URL("../payments/payments.html", location.href);
+      paymentUrl.search = new URLSearchParams(new FormData(orderForm)).toString();
+      window.top.location.assign(paymentUrl.href);
+    });
+
+    document.querySelector("#checkout-login-go").addEventListener("click", () => {
+      const draft = new URLSearchParams(new FormData(orderForm));
+      sessionStorage.setItem(checkoutDraftKey, draft.toString());
+
+      const loginUrl = new URL("../login/login.html", location.href);
+      loginUrl.searchParams.set("resumeCheckout", "1");
+      window.top.location.assign(loginUrl.href);
+    });
+
+    restoreCheckoutDraft();
     orderForm.addEventListener("change", refreshOrderTotal);
     window.addEventListener("pageshow", refreshOrderTotal);
     refreshOrderTotal();
+    orderForm.querySelector(".detail-pay").disabled = false;
 
     if (window.self !== window.top) {
       document.querySelector("[data-site-footer]").remove();

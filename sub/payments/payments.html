@@ -10,6 +10,33 @@
 
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <script defer src="../../js/layout.js"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    function requireCheckoutLogin() {
+      try {
+        if (window.IpdeokAuth?.currentUser?.()) return true;
+      } catch {
+        // Treat an unreadable session as signed out.
+      }
+
+      document.documentElement.hidden = true;
+      const order = new URLSearchParams(location.search);
+      const loginUrl = new URL("../login/login.html", location.href);
+
+      if (order.get("menu")) {
+        sessionStorage.setItem("ipdeokbokki.checkoutDraft", order.toString());
+        loginUrl.searchParams.set("resumeCheckout", "1");
+      }
+
+      location.replace(loginUrl.href);
+      return false;
+    }
+
+    requireCheckoutLogin();
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) requireCheckoutLogin();
+    });
+  </script>
 </head>
 <body>
   <div class="page">
@@ -136,6 +163,51 @@
   </div>
 
   <script>
+    const sideMenus = {
+      "side-sundae": {
+        "name": "쫄깃 찰순대",
+        "image": "side_soondae.png",
+        "description": "쫄깃한 당면순대. 떡볶이 소스에 콕 찍어 먹기 좋아요",
+        "price": 4500
+      },
+      "side-assorted-fritters": {
+        "name": "찍먹 모둠튀김",
+        "image": "side_tempura.png",
+        "description": "김말이·오징어·야채만두를 한 접시에 담은 튀김 세트",
+        "price": 5500
+      },
+      "side-rice-ball": {
+        "name": "꼬소 김가루 주먹밥",
+        "image": "side_riceball.png",
+        "description": "김가루와 참기름을 넣어 고소하게 뭉친 주먹밥",
+        "price": 3000
+      },
+      "side-spicy-gimbap": {
+        "name": "빨간 입덕김밥",
+        "image": "side_gimbab.png",
+        "description": "매콤한 입덕 소스와 참치를 비빈 밥에 치즈를 넣어 완벽하게",
+        "price": 6000
+      },
+      "side-butter-toast": {
+        "name": "딸기잼 달걀 버터토스트",
+        "image": "side_toast.png",
+        "description": "식빵에 딸기잼을 바르고 달걀을 끼워 버터에 노릇하게 구웠어요",
+        "price": 4500
+      },
+      "side-cheese-ball": {
+        "name": "한입 치즈볼",
+        "image": "side_cheeseball.png",
+        "description": "바삭한 한입 속에 부드럽게 녹아드는 치즈",
+        "price": 4000
+      },
+      "side-seaweed-roll": {
+        "name": "최애 김말이",
+        "image": "side_gimmari.png",
+        "description": "당면을 김에 돌돌 말아 겉은 바삭, 속은 쫄깃하게",
+        "price": 2500
+      }
+    };
+
     const menuItems = {
       original: {
         name: "첫입 오리지널 떡볶이",
@@ -146,7 +218,7 @@
       rose: {
         name: "최애 로제 떡볶이",
         image: "rose.png",
-        description: "매콤한 떡볶이 양념에 크림을 더해 부드럽게",
+        description: "매콤한 떡볶이 소스에 크림을 더해 부드럽게",
         prices: { small: 18000, large: 30000 }
       },
       spicy: {
@@ -233,14 +305,15 @@
     }
 
     const requestedMenu = params.get("menu");
-    const hasMenu = Object.hasOwn(menuItems, requestedMenu);
+    const isSide = Object.hasOwn(sideMenus, requestedMenu);
+    const hasMenu = isSide || Object.hasOwn(menuItems, requestedMenu);
     const menuKey = hasMenu ? requestedMenu : "set-rose";
-    const menu = menuItems[menuKey];
+    const menu = isSide ? sideMenus[menuKey] : menuItems[menuKey];
     const serving = hasMenu && params.get("serving") !== "large" ? "small" : "large";
     const servingLabel = serving === "small" ? "1–2인" : "3–4인";
     const menuQuantity = hasMenu ? getQuantity("quantity") : 1;
     const extrasList = document.querySelector("#order-extras");
-    let orderPrice = menu.prices[serving] * menuQuantity;
+    let orderPrice = (isSide ? menu.price : menu.prices[serving]) * menuQuantity;
 
     document.querySelector("#order-link").href =
       `../detail/detail.html?menu=${encodeURIComponent(menuKey)}`;
@@ -248,7 +321,7 @@
     document.querySelector("#order-name").textContent = menu.name;
     document.querySelector("#order-spice").dataset.spice = menuKey;
     document.querySelector("#order-serving").textContent =
-      `(${servingLabel}) × ${menuQuantity}`;
+      isSide ? `× ${menuQuantity}` : `(${servingLabel}) × ${menuQuantity}`;
     document.querySelector("#order-description").textContent = menu.description;
 
     if (hasMenu) {
@@ -304,10 +377,10 @@
     checkout.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (agree.checked) {
+      if (requireCheckoutLogin() && agree.checked) {
         const completionUrl = new URL("../payments_fin/payment_fin.html", location.href);
         completionUrl.searchParams.set("menu", menuKey);
-        completionUrl.searchParams.set("serving", serving);
+        if (!isSide) completionUrl.searchParams.set("serving", serving);
         window.location.assign(completionUrl.href);
       }
     });
