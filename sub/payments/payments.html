@@ -28,7 +28,11 @@
 
             <span class="order-copy">
               <span class="tags"><span>매콤</span> <span>달달</span></span>
-              <strong id="order-name">둘이서 최애 세트 (3–4인)</strong>
+              <strong>
+                <span id="order-name">둘이서 최애 세트</span><span
+                  id="order-spice" class="menu-spice" data-spice="" hidden></span>
+                <span id="order-serving">(3–4인)</span>
+              </strong>
               <small id="order-description">로제 떡볶이, 치즈볼 4개, 빅 주먹밥 2개</small>
             </span>
           </a>
@@ -142,7 +146,7 @@
       rose: {
         name: "최애 로제 떡볶이",
         image: "rose.png",
-        description: "매콤한 떡볶이 소스에 크림을 더해 부드럽게",
+        description: "매콤한 떡볶이 양념에 크림을 더해 부드럽게",
         prices: { small: 18000, large: 30000 }
       },
       spicy: {
@@ -241,8 +245,10 @@
     document.querySelector("#order-link").href =
       `../detail/detail.html?menu=${encodeURIComponent(menuKey)}`;
     document.querySelector("#order-image").src = `../../img/menu/${menu.image}`;
-    document.querySelector("#order-name").textContent =
-      `${menu.name} (${servingLabel}) × ${menuQuantity}`;
+    document.querySelector("#order-name").textContent = menu.name;
+    document.querySelector("#order-spice").dataset.spice = menuKey;
+    document.querySelector("#order-serving").textContent =
+      `(${servingLabel}) × ${menuQuantity}`;
     document.querySelector("#order-description").textContent = menu.description;
 
     if (hasMenu) {
@@ -299,7 +305,10 @@
       event.preventDefault();
 
       if (agree.checked) {
-        window.location.assign("../payments_fin/payment_fin.html");
+        const completionUrl = new URL("../payments_fin/payment_fin.html", location.href);
+        completionUrl.searchParams.set("menu", menuKey);
+        completionUrl.searchParams.set("serving", serving);
+        window.location.assign(completionUrl.href);
       }
     });
 

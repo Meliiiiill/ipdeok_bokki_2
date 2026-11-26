@@ -27,69 +27,268 @@
           <p>입덕이랑 오늘의 최애를 찾아봐요.</p>
         </div>
 
-        <form id="login-form" class="login-form" method="post">
-          <div class="login-field">
-            <label for="login-email">이메일</label>
-            <input id="login-email" type="email"
-                   autocomplete="username" autocapitalize="none"
-                   placeholder="이메일을 입력해 주세요" required>
-          </div>
+        <div class="login-content">
+          <div id="auth-forms">
+            <form id="login-form" class="login-form" method="post">
+              <div class="login-field">
+                <label for="login-email">이메일</label>
+                <input id="login-email" name="email" type="email"
+                       autocomplete="username" autocapitalize="none"
+                       placeholder="이메일을 입력해 주세요"
+                       aria-describedby="login-error" required>
+              </div>
 
-          <div class="login-field">
-            <label for="login-password">비밀번호</label>
-            <div class="password-field">
-              <input id="login-password" type="password"
-                     autocomplete="current-password"
-                     placeholder="비밀번호를 입력해 주세요" required>
+              <div class="login-field">
+                <label for="login-password">비밀번호</label>
+                <div class="password-field">
+                  <input id="login-password" name="password" type="password"
+                         autocomplete="current-password"
+                         placeholder="비밀번호를 입력해 주세요"
+                         aria-describedby="login-error" required>
 
-              <button id="password-toggle" class="password-toggle" type="button"
-                      aria-controls="login-password" aria-label="비밀번호 보기" disabled>
-                보기
-              </button>
+                  <button id="password-toggle" class="password-toggle" type="button"
+                          aria-controls="login-password" aria-label="비밀번호 보기">
+                    보기
+                  </button>
+                </div>
+                <p id="login-error" class="login-error" role="alert"></p>
+              </div>
+
+              <label class="remember-login">
+                <input type="checkbox" name="remember">
+                <span>로그인 상태 유지</span>
+              </label>
+
+              <button class="login-submit" type="submit" disabled>로그인</button>
+            </form>
+
+            <div id="login-help" class="login-help" role="group" aria-label="계정 도움">
+              <button id="find-id" type="button">아이디 찾기</button>
+              <button id="find-password" type="button">비밀번호 찾기</button>
+              <button id="show-signup" type="button">회원가입</button>
             </div>
+
+            <form id="signup-form" class="login-form" method="post" hidden>
+              <h2>회원가입</h2>
+
+              <div class="login-field">
+                <label for="signup-email">이메일</label>
+                <input id="signup-email" name="email" type="email"
+                       autocomplete="username" autocapitalize="none"
+                       placeholder="이메일을 입력해 주세요" required>
+              </div>
+
+              <div class="login-field">
+                <label for="signup-password">비밀번호</label>
+                <input id="signup-password" name="password" type="password"
+                       autocomplete="new-password" minlength="8"
+                       placeholder="8자 이상 입력해 주세요" required>
+              </div>
+
+              <div class="login-field">
+                <label for="signup-confirm">비밀번호 확인</label>
+                <input id="signup-confirm" name="confirm" type="password"
+                       autocomplete="new-password"
+                       placeholder="비밀번호를 한 번 더 입력해 주세요" required>
+              </div>
+
+              <button class="login-submit" type="submit" disabled>회원가입</button>
+              <button id="show-login" class="login-text-button" type="button">
+                로그인으로 돌아가기
+              </button>
+            </form>
           </div>
 
-          <button id="login-submit" class="login-submit" type="submit" disabled>
-            로그인
-          </button>
+          <section id="signed-in" class="signed-in" aria-labelledby="signed-in-title" hidden>
+            <h2 id="signed-in-title">로그인 완료</h2>
+            <p id="signed-in-email"></p>
+
+            <div class="signed-in-actions">
+              <a id="mypage-link" class="login-submit" href="../mypage/mypage.html">
+                마이페이지 가기
+              </a>
+              <a class="signed-in-home" href="../../index.html">홈 바로가기</a>
+            </div>
+
+            <button id="logout-button" class="login-text-button" type="button">
+              로그아웃
+            </button>
+          </section>
 
           <p id="login-status" class="login-status" role="status"></p>
-        </form>
+        </div>
       </section>
     </main>
 
     <div data-site-footer></div>
   </div>
 
+  <script src="../../js/auth.js"></script>
   <script>
-    const loginForm = document.querySelector("#login-form");
-    const loginPassword = document.querySelector("#login-password");
-    const passwordToggle = document.querySelector("#password-toggle");
-    const loginSubmit = document.querySelector("#login-submit");
-    const loginStatus = document.querySelector("#login-status");
+    (() => {
+      const auth = window.IpdeokAuth;
+      const authForms = document.querySelector("#auth-forms");
+      const loginForm = document.querySelector("#login-form");
+      const signupForm = document.querySelector("#signup-form");
+      const loginHelp = document.querySelector("#login-help");
+      const loginEmail = document.querySelector("#login-email");
+      const password = document.querySelector("#login-password");
+      const passwordToggle = document.querySelector("#password-toggle");
+      const loginError = document.querySelector("#login-error");
+      const signupEmail = document.querySelector("#signup-email");
+      const signupConfirm = document.querySelector("#signup-confirm");
+      const signedIn = document.querySelector("#signed-in");
+      const signedInEmail = document.querySelector("#signed-in-email");
+      const mypageLink = document.querySelector("#mypage-link");
+      const status = document.querySelector("#login-status");
+      const loginSubmit = loginForm.querySelector('[type="submit"]');
+      const signupSubmit = signupForm.querySelector('[type="submit"]');
 
-    passwordToggle.addEventListener("click", () => {
-      const showPassword = loginPassword.type === "password";
+      function clearLoginError() {
+        loginError.textContent = "";
+        loginEmail.removeAttribute("aria-invalid");
+        password.removeAttribute("aria-invalid");
+      }
 
-      loginPassword.type = showPassword ? "text" : "password";
-      passwordToggle.textContent = showPassword ? "숨기기" : "보기";
-      passwordToggle.setAttribute(
-        "aria-label",
-        showPassword ? "비밀번호 숨기기" : "비밀번호 보기"
-      );
-    });
+      function showMode(mode) {
+        const isLogin = mode === "login";
 
-    loginForm.addEventListener("input", () => {
-      loginStatus.textContent = "";
-    });
+        loginForm.hidden = !isLogin;
+        loginHelp.hidden = !isLogin;
+        signupForm.hidden = isLogin;
+        status.textContent = "";
+        clearLoginError();
+      }
 
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      loginStatus.textContent = "로그인 기능은 준비 중이에요.";
-    });
+      function renderSession() {
+        const user = auth.currentUser();
 
-    passwordToggle.disabled = false;
-    loginSubmit.disabled = false;
+        authForms.hidden = Boolean(user);
+        signedIn.hidden = !user;
+        signedInEmail.textContent = user ? `${user.email} 계정으로 로그인했어요.` : "";
+      }
+
+      function setPasswordVisible(visible) {
+        password.type = visible ? "text" : "password";
+        passwordToggle.textContent = visible ? "숨기기" : "보기";
+        passwordToggle.setAttribute(
+          "aria-label",
+          visible ? "비밀번호 숨기기" : "비밀번호 보기"
+        );
+      }
+
+      document.querySelector("#show-signup").addEventListener("click", () => {
+        showMode("signup");
+        signupEmail.focus();
+      });
+
+      document.querySelector("#show-login").addEventListener("click", () => {
+        showMode("login");
+        loginEmail.focus();
+      });
+
+      document.querySelector("#find-id").addEventListener("click", () => {
+        status.textContent = "입덕볶이 아이디는 회원가입할 때 사용한 이메일이에요.";
+      });
+
+      document.querySelector("#find-password").addEventListener("click", () => {
+        status.textContent = "이 프로토타입에서는 비밀번호 재설정을 지원하지 않아요.";
+      });
+
+      passwordToggle.addEventListener("click", () => {
+        setPasswordVisible(password.type === "password");
+      });
+
+      loginForm.addEventListener("input", () => {
+        clearLoginError();
+        status.textContent = "";
+      });
+
+      signupForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (signupSubmit.disabled) return;
+
+        const fields = new FormData(signupForm);
+        const email = fields.get("email");
+        const newPassword = fields.get("password");
+
+        if (newPassword !== fields.get("confirm")) {
+          status.textContent = "비밀번호 확인이 일치하지 않아요.";
+          signupConfirm.focus();
+          return;
+        }
+
+        signupSubmit.disabled = true;
+        status.textContent = "";
+
+        try {
+          await auth.register(email, newPassword);
+          signupForm.reset();
+          showMode("login");
+          loginEmail.value = email.trim();
+          status.textContent = "회원가입이 완료됐어요. 로그인해 주세요.";
+          password.focus();
+        } catch (error) {
+          status.textContent = error.message;
+        } finally {
+          signupSubmit.disabled = false;
+        }
+      });
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (loginSubmit.disabled) return;
+
+        const fields = new FormData(loginForm);
+        clearLoginError();
+        status.textContent = "";
+        loginSubmit.disabled = true;
+
+        try {
+          await auth.login(
+            fields.get("email"),
+            fields.get("password"),
+            fields.has("remember")
+          );
+
+          loginForm.reset();
+          setPasswordVisible(false);
+          renderSession();
+          mypageLink.focus();
+        } catch (error) {
+          loginEmail.setAttribute("aria-invalid", "true");
+          password.setAttribute("aria-invalid", "true");
+          loginError.textContent = error.message;
+        } finally {
+          loginSubmit.disabled = false;
+        }
+      });
+
+      document.querySelector("#logout-button").addEventListener("click", () => {
+        try {
+          auth.logout();
+          showMode("login");
+          renderSession();
+          status.textContent = "로그아웃했어요.";
+          loginEmail.focus();
+        } catch {
+          status.textContent = "로그아웃하지 못했어요. 다시 시도해 주세요.";
+        }
+      });
+
+      if (!auth) {
+        status.textContent = "로그인 기능을 불러오지 못했어요.";
+        return;
+      }
+
+      try {
+        renderSession();
+        loginSubmit.disabled = false;
+        signupSubmit.disabled = false;
+      } catch {
+        status.textContent = "로그인 정보를 불러오지 못했어요.";
+      }
+    })();
   </script>
 </body>
 </html>

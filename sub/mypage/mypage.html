@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>마이페이지 | 입덕볶이</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="../../js/layout.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div data-site-header></div>
+
+    <main class="mypage">
+      <h1>마이페이지</h1>
+
+      <section id="account-card" class="account-card" aria-labelledby="account-title" hidden>
+        <h2 id="account-title">내 계정</h2>
+        <dl class="account-info">
+          <dt>이메일</dt>
+          <dd id="account-email"></dd>
+        </dl>
+
+        <button id="logout-button" class="account-logout" type="button">로그아웃</button>
+      </section>
+
+      <p id="account-status" class="account-status" role="status"></p>
+    </main>
+
+    <div data-site-footer></div>
+  </div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+    const auth = window.IpdeokAuth;
+    const accountCard = document.querySelector("#account-card");
+    const accountEmail = document.querySelector("#account-email");
+    const accountStatus = document.querySelector("#account-status");
+    const logoutButton = document.querySelector("#logout-button");
+
+    function renderAccount() {
+      try {
+        const user = auth.currentUser();
+
+        if (!user) {
+          window.location.replace("../login/login.html");
+          return;
+        }
+
+        accountEmail.textContent = user.email;
+        accountCard.hidden = false;
+      } catch {
+        accountCard.hidden = true;
+        accountStatus.textContent = "로그인 정보를 불러오지 못했어요.";
+      }
+    }
+
+    logoutButton.addEventListener("click", () => {
+      try {
+        auth.logout();
+        window.location.replace("../login/login.html");
+      } catch {
+        accountStatus.textContent = "로그아웃하지 못했어요. 다시 시도해 주세요.";
+      }
+    });
+
+    window.addEventListener("pageshow", renderAccount);
+    window.addEventListener("storage", renderAccount);
+    renderAccount();
+  </script>
+</body>
+</html>

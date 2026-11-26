@@ -22,8 +22,13 @@
         </div>
 
         <div class="detail-body">
-          <h1 id="detail-title">첫입 오리지널 떡볶이</h1>
+          <h1>
+            <span id="detail-title">첫입 오리지널 떡볶이</span><span
+              id="detail-spice" class="menu-spice" data-spice="" hidden></span>
+          </h1>
           <p id="detail-description">달콤하고 매콤한 양념에 쫄깃한 떡을 버무린 기본 떡볶이예요.</p>
+          <p id="detail-spice-description" class="spice-description"
+             data-spice="" data-spice-description hidden></p>
         </div>
 
         <form class="order-form" action="../payments/payments.html" method="get" target="_top">
@@ -261,6 +266,8 @@
     document.querySelector("#detail-title").textContent = selectedMenu.name;
     document.querySelector("#detail-description").textContent = selectedMenu.description;
     document.querySelector("#order-menu").value = menuKey;
+    document.querySelector("#detail-spice").dataset.spice = menuKey;
+    document.querySelector("#detail-spice-description").dataset.spice = menuKey;
 
     const orderForm = document.querySelector(".order-form");
     const totalPrice = document.querySelector("#detail-total-price");
